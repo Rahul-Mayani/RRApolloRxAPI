@@ -1,0 +1,444 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6CFB072D39BF1037EC03F267 /* Pods_RRApolloRxAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13C8B57DC375950368FD80CD /* Pods_RRApolloRxAPI.framework */; };
+		EEDB06CA23B0E90F00A5542D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDB06C923B0E90F00A5542D /* AppDelegate.swift */; };
+		EEDB06CE23B0E90F00A5542D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDB06CD23B0E90F00A5542D /* ViewController.swift */; };
+		EEDB06D123B0E90F00A5542D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEDB06CF23B0E90F00A5542D /* Main.storyboard */; };
+		EEDB06D323B0E91000A5542D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEDB06D223B0E91000A5542D /* Assets.xcassets */; };
+		EEDB06D623B0E91000A5542D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEDB06D423B0E91000A5542D /* LaunchScreen.storyboard */; };
+		EEDB06DE23B0E98F00A5542D /* RRAPIRxManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDB06DD23B0E98F00A5542D /* RRAPIRxManager.swift */; };
+		EEDB06E223B0F20000A5542D /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = EEDB06E123B0F20000A5542D /* schema.json */; };
+		EEDB06E423B0F21B00A5542D /* TheExampleAppQueries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = EEDB06E323B0F21B00A5542D /* TheExampleAppQueries.graphql */; };
+		EEDB06E623B0F35600A5542D /* GraphQLAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDB06E523B0F35600A5542D /* GraphQLAPI.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		13C8B57DC375950368FD80CD /* Pods_RRApolloRxAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RRApolloRxAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A07ABA7F32A9DB42630FE931 /* Pods-RRApolloRxAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RRApolloRxAPI.release.xcconfig"; path = "Target Support Files/Pods-RRApolloRxAPI/Pods-RRApolloRxAPI.release.xcconfig"; sourceTree = "<group>"; };
+		EA10ACBB9AFB4839561716BD /* Pods-RRApolloRxAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RRApolloRxAPI.debug.xcconfig"; path = "Target Support Files/Pods-RRApolloRxAPI/Pods-RRApolloRxAPI.debug.xcconfig"; sourceTree = "<group>"; };
+		EEDB06C623B0E90F00A5542D /* RRApolloRxAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RRApolloRxAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEDB06C923B0E90F00A5542D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EEDB06CD23B0E90F00A5542D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EEDB06D023B0E90F00A5542D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EEDB06D223B0E91000A5542D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EEDB06D523B0E91000A5542D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EEDB06D723B0E91000A5542D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEDB06DD23B0E98F00A5542D /* RRAPIRxManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RRAPIRxManager.swift; sourceTree = "<group>"; };
+		EEDB06E123B0F20000A5542D /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		EEDB06E323B0F21B00A5542D /* TheExampleAppQueries.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TheExampleAppQueries.graphql; sourceTree = "<group>"; };
+		EEDB06E523B0F35600A5542D /* GraphQLAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphQLAPI.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EEDB06C323B0E90F00A5542D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CFB072D39BF1037EC03F267 /* Pods_RRApolloRxAPI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1D8F46F055A3677FC668B273 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EA10ACBB9AFB4839561716BD /* Pods-RRApolloRxAPI.debug.xcconfig */,
+				A07ABA7F32A9DB42630FE931 /* Pods-RRApolloRxAPI.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		EB14C1B156EA1C013633284A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				13C8B57DC375950368FD80CD /* Pods_RRApolloRxAPI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EEDB06BD23B0E90F00A5542D = {
+			isa = PBXGroup;
+			children = (
+				EEDB06C823B0E90F00A5542D /* RRApolloRxAPI */,
+				EEDB06C723B0E90F00A5542D /* Products */,
+				1D8F46F055A3677FC668B273 /* Pods */,
+				EB14C1B156EA1C013633284A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		EEDB06C723B0E90F00A5542D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EEDB06C623B0E90F00A5542D /* RRApolloRxAPI.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EEDB06C823B0E90F00A5542D /* RRApolloRxAPI */ = {
+			isa = PBXGroup;
+			children = (
+				EEDB06C923B0E90F00A5542D /* AppDelegate.swift */,
+				EEDB06CD23B0E90F00A5542D /* ViewController.swift */,
+				EEDB06DD23B0E98F00A5542D /* RRAPIRxManager.swift */,
+				EEDB06E123B0F20000A5542D /* schema.json */,
+				EEDB06E523B0F35600A5542D /* GraphQLAPI.swift */,
+				EEDB06E323B0F21B00A5542D /* TheExampleAppQueries.graphql */,
+				EEDB06CF23B0E90F00A5542D /* Main.storyboard */,
+				EEDB06D223B0E91000A5542D /* Assets.xcassets */,
+				EEDB06D423B0E91000A5542D /* LaunchScreen.storyboard */,
+				EEDB06D723B0E91000A5542D /* Info.plist */,
+			);
+			path = RRApolloRxAPI;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EEDB06C523B0E90F00A5542D /* RRApolloRxAPI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EEDB06DA23B0E91000A5542D /* Build configuration list for PBXNativeTarget "RRApolloRxAPI" */;
+			buildPhases = (
+				515987699F7E71E005B42511 /* [CP] Check Pods Manifest.lock */,
+				EEDB06E023B0F0BB00A5542D /* Generate Apollo GraphQL API */,
+				EEDB06C223B0E90F00A5542D /* Sources */,
+				EEDB06C323B0E90F00A5542D /* Frameworks */,
+				EEDB06C423B0E90F00A5542D /* Resources */,
+				FC2DC3BC669699C75DB89717 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RRApolloRxAPI;
+			productName = RRApolloRxAPI;
+			productReference = EEDB06C623B0E90F00A5542D /* RRApolloRxAPI.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EEDB06BE23B0E90F00A5542D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = RR;
+				TargetAttributes = {
+					EEDB06C523B0E90F00A5542D = {
+						CreatedOnToolsVersion = 11.3;
+					};
+				};
+			};
+			buildConfigurationList = EEDB06C123B0E90F00A5542D /* Build configuration list for PBXProject "RRApolloRxAPI" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EEDB06BD23B0E90F00A5542D;
+			productRefGroup = EEDB06C723B0E90F00A5542D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EEDB06C523B0E90F00A5542D /* RRApolloRxAPI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EEDB06C423B0E90F00A5542D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEDB06E223B0F20000A5542D /* schema.json in Resources */,
+				EEDB06D623B0E91000A5542D /* LaunchScreen.storyboard in Resources */,
+				EEDB06D323B0E91000A5542D /* Assets.xcassets in Resources */,
+				EEDB06E423B0F21B00A5542D /* TheExampleAppQueries.graphql in Resources */,
+				EEDB06D123B0E90F00A5542D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		515987699F7E71E005B42511 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RRApolloRxAPI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EEDB06E023B0F0BB00A5542D /* Generate Apollo GraphQL API */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Apollo GraphQL API";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSCRIPT_PATH=\"${PODS_ROOT}/Apollo/scripts\"\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"schema.json\" GraphQLAPI.swift\n";
+		};
+		FC2DC3BC669699C75DB89717 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RRApolloRxAPI/Pods-RRApolloRxAPI-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RRApolloRxAPI/Pods-RRApolloRxAPI-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RRApolloRxAPI/Pods-RRApolloRxAPI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EEDB06C223B0E90F00A5542D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEDB06E623B0F35600A5542D /* GraphQLAPI.swift in Sources */,
+				EEDB06CE23B0E90F00A5542D /* ViewController.swift in Sources */,
+				EEDB06CA23B0E90F00A5542D /* AppDelegate.swift in Sources */,
+				EEDB06DE23B0E98F00A5542D /* RRAPIRxManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		EEDB06CF23B0E90F00A5542D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EEDB06D023B0E90F00A5542D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EEDB06D423B0E91000A5542D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EEDB06D523B0E91000A5542D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EEDB06D823B0E91000A5542D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EEDB06D923B0E91000A5542D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EEDB06DB23B0E91000A5542D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA10ACBB9AFB4839561716BD /* Pods-RRApolloRxAPI.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RRApolloRxAPI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rr.RRApolloRxAPI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		EEDB06DC23B0E91000A5542D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A07ABA7F32A9DB42630FE931 /* Pods-RRApolloRxAPI.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RRApolloRxAPI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rr.RRApolloRxAPI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EEDB06C123B0E90F00A5542D /* Build configuration list for PBXProject "RRApolloRxAPI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EEDB06D823B0E91000A5542D /* Debug */,
+				EEDB06D923B0E91000A5542D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EEDB06DA23B0E91000A5542D /* Build configuration list for PBXNativeTarget "RRApolloRxAPI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EEDB06DB23B0E91000A5542D /* Debug */,
+				EEDB06DC23B0E91000A5542D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EEDB06BE23B0E90F00A5542D /* Project object */;
+}
