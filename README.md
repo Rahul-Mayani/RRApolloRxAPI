@@ -8,7 +8,7 @@ pod 'RxCocoa'
 
 pod 'RxSwift'
 
-pod 'Apollo'
+pod 'Apollo' 
 
 ## Installation
 
