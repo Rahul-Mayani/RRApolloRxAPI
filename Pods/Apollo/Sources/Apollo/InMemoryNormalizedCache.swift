@@ -6,35 +6,22 @@ public final class InMemoryNormalizedCache: NormalizedCache {
   public init(records: RecordSet = RecordSet()) {
     self.records = records
   }
-  
-  public func loadRecords(forKeys keys: [CacheKey],
-                          callbackQueue: DispatchQueue?,
-                          completion: @escaping (Result<[Record?], Error>) -> Void) {
-    let records = keys.map { self.records[$0] }
-    DispatchQueue.apollo_returnResultAsyncIfNeeded(on: callbackQueue,
-                                                   action: completion,
-                                                   result: .success(records))
-  }
-  
-  public func merge(records: RecordSet,
-                    callbackQueue: DispatchQueue?,
-                    completion: @escaping (Result<Set<CacheKey>, Error>) -> Void) {
-    let cacheKeys = self.records.merge(records: records)
-    DispatchQueue.apollo_returnResultAsyncIfNeeded(on: callbackQueue,
-                                                   action: completion,
-                                                   result: .success(cacheKeys))
+
+  public func loadRecords(forKeys keys: Set<CacheKey>) throws -> [CacheKey: Record] {
+    return keys.reduce(into: [:]) { result, key in
+      result[key] = records[key]
+    }
   }
 
-  public func clear(callbackQueue: DispatchQueue?,
-                    completion: ((Result<Void, Error>) -> Void)?) {
-    self.records.clear()
-    
-    guard let completion = completion else {
-      return
-    }
-    
-    DispatchQueue.apollo_returnResultAsyncIfNeeded(on: callbackQueue,
-                                                   action: completion,
-                                                   result: .success(()))
+  public func removeRecord(for key: CacheKey) throws {
+    records.removeRecord(for: key)
+  }
+  
+  public func merge(records newRecords: RecordSet) throws -> Set<CacheKey> {
+    return records.merge(records: newRecords)
+  }
+
+  public func clear() {
+    records.clear()
   }
 }

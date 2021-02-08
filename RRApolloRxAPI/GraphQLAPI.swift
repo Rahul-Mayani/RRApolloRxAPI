@@ -1,23 +1,27 @@
+// @generated
 //  This file was automatically generated and should not be edited.
 
 import Apollo
+import Foundation
 
 public final class HomeQuery: GraphQLQuery {
-  /// query Home($slug: String!) {
-  ///   layoutCollection(where: {slug: $slug}) {
-  ///     __typename
-  ///     items {
-  ///       __typename
-  ///       ...LayoutFragment
-  ///     }
-  ///   }
-  /// }
-  public let operationDefinition =
-    "query Home($slug: String!) { layoutCollection(where: {slug: $slug}) { __typename items { __typename ...LayoutFragment } } }"
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    query Home($slug: String!) {
+      layoutCollection(where: {slug: $slug}) {
+        __typename
+        items {
+          __typename
+          ...LayoutFragment
+        }
+      }
+    }
+    """
 
-  public let operationName = "Home"
+  public let operationName: String = "Home"
 
-  public var queryDocument: String { return operationDefinition.appending(LayoutFragment.fragmentDefinition).appending(LayoutHighlightedCourseFragment.fragmentDefinition).appending(CourseFragment.fragmentDefinition).appending(AssetFragment.fragmentDefinition).appending(LessonFragment.fragmentDefinition).appending(LessonCodeSnippetFragment.fragmentDefinition).appending(LessonImageFragment.fragmentDefinition).appending(LessonCopyFragment.fragmentDefinition).appending(CategoryFragment.fragmentDefinition).appending(LayoutCopyFragment.fragmentDefinition).appending(LayoutHeroImageFragment.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending("\n" + LayoutFragment.fragmentDefinition).appending("\n" + LayoutHighlightedCourseFragment.fragmentDefinition).appending("\n" + CourseFragment.fragmentDefinition).appending("\n" + AssetFragment.fragmentDefinition).appending("\n" + LessonFragment.fragmentDefinition).appending("\n" + LessonCodeSnippetFragment.fragmentDefinition).appending("\n" + LessonImageFragment.fragmentDefinition).appending("\n" + LessonCopyFragment.fragmentDefinition).appending("\n" + CategoryFragment.fragmentDefinition).appending("\n" + LayoutCopyFragment.fragmentDefinition).appending("\n" + LayoutHeroImageFragment.fragmentDefinition) }
 
   public var slug: String
 
@@ -30,11 +34,13 @@ public final class HomeQuery: GraphQLQuery {
   }
 
   public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Query"]
+    public static let possibleTypes: [String] = ["Query"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("layoutCollection", arguments: ["where": ["slug": GraphQLVariable("slug")]], type: .object(LayoutCollection.selections)),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("layoutCollection", arguments: ["where": ["slug": GraphQLVariable("slug")]], type: .object(LayoutCollection.selections)),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -56,12 +62,14 @@ public final class HomeQuery: GraphQLQuery {
     }
 
     public struct LayoutCollection: GraphQLSelectionSet {
-      public static let possibleTypes = ["LayoutCollection"]
+      public static let possibleTypes: [String] = ["LayoutCollection"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -92,12 +100,14 @@ public final class HomeQuery: GraphQLQuery {
       }
 
       public struct Item: GraphQLSelectionSet {
-        public static let possibleTypes = ["Layout"]
+        public static let possibleTypes: [String] = ["Layout"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLFragmentSpread(LayoutFragment.self),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLFragmentSpread(LayoutFragment.self),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -145,21 +155,23 @@ public final class HomeQuery: GraphQLQuery {
 }
 
 public final class CourseBySlugQuery: GraphQLQuery {
-  /// query CourseBySlug($slug: String!) {
-  ///   courseCollection(where: {slug: $slug}) {
-  ///     __typename
-  ///     items {
-  ///       __typename
-  ///       ...CourseFragment
-  ///     }
-  ///   }
-  /// }
-  public let operationDefinition =
-    "query CourseBySlug($slug: String!) { courseCollection(where: {slug: $slug}) { __typename items { __typename ...CourseFragment } } }"
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    query CourseBySlug($slug: String!) {
+      courseCollection(where: {slug: $slug}) {
+        __typename
+        items {
+          __typename
+          ...CourseFragment
+        }
+      }
+    }
+    """
 
-  public let operationName = "CourseBySlug"
+  public let operationName: String = "CourseBySlug"
 
-  public var queryDocument: String { return operationDefinition.appending(CourseFragment.fragmentDefinition).appending(AssetFragment.fragmentDefinition).appending(LessonFragment.fragmentDefinition).appending(LessonCodeSnippetFragment.fragmentDefinition).appending(LessonImageFragment.fragmentDefinition).appending(LessonCopyFragment.fragmentDefinition).appending(CategoryFragment.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending("\n" + CourseFragment.fragmentDefinition).appending("\n" + AssetFragment.fragmentDefinition).appending("\n" + LessonFragment.fragmentDefinition).appending("\n" + LessonCodeSnippetFragment.fragmentDefinition).appending("\n" + LessonImageFragment.fragmentDefinition).appending("\n" + LessonCopyFragment.fragmentDefinition).appending("\n" + CategoryFragment.fragmentDefinition) }
 
   public var slug: String
 
@@ -172,11 +184,13 @@ public final class CourseBySlugQuery: GraphQLQuery {
   }
 
   public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Query"]
+    public static let possibleTypes: [String] = ["Query"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("courseCollection", arguments: ["where": ["slug": GraphQLVariable("slug")]], type: .object(CourseCollection.selections)),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("courseCollection", arguments: ["where": ["slug": GraphQLVariable("slug")]], type: .object(CourseCollection.selections)),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -198,12 +212,14 @@ public final class CourseBySlugQuery: GraphQLQuery {
     }
 
     public struct CourseCollection: GraphQLSelectionSet {
-      public static let possibleTypes = ["CourseCollection"]
+      public static let possibleTypes: [String] = ["CourseCollection"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -234,12 +250,14 @@ public final class CourseBySlugQuery: GraphQLQuery {
       }
 
       public struct Item: GraphQLSelectionSet {
-        public static let possibleTypes = ["Course"]
+        public static let possibleTypes: [String] = ["Course"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLFragmentSpread(CourseFragment.self),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLFragmentSpread(CourseFragment.self),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -287,27 +305,29 @@ public final class CourseBySlugQuery: GraphQLQuery {
 }
 
 public final class CoursesByCategoryWithIdQuery: GraphQLQuery {
-  /// query CoursesByCategoryWithId($categoryId: String!) {
-  ///   category(id: $categoryId) {
-  ///     __typename
-  ///     linkedFrom {
-  ///       __typename
-  ///       entryCollection {
-  ///         __typename
-  ///         items {
-  ///           __typename
-  ///           ...CourseFragment
-  ///         }
-  ///       }
-  ///     }
-  ///   }
-  /// }
-  public let operationDefinition =
-    "query CoursesByCategoryWithId($categoryId: String!) { category(id: $categoryId) { __typename linkedFrom { __typename entryCollection { __typename items { __typename ...CourseFragment } } } } }"
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    query CoursesByCategoryWithId($categoryId: String!) {
+      category(id: $categoryId) {
+        __typename
+        linkedFrom {
+          __typename
+          entryCollection {
+            __typename
+            items {
+              __typename
+              ...CourseFragment
+            }
+          }
+        }
+      }
+    }
+    """
 
-  public let operationName = "CoursesByCategoryWithId"
+  public let operationName: String = "CoursesByCategoryWithId"
 
-  public var queryDocument: String { return operationDefinition.appending(CourseFragment.fragmentDefinition).appending(AssetFragment.fragmentDefinition).appending(LessonFragment.fragmentDefinition).appending(LessonCodeSnippetFragment.fragmentDefinition).appending(LessonImageFragment.fragmentDefinition).appending(LessonCopyFragment.fragmentDefinition).appending(CategoryFragment.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending("\n" + CourseFragment.fragmentDefinition).appending("\n" + AssetFragment.fragmentDefinition).appending("\n" + LessonFragment.fragmentDefinition).appending("\n" + LessonCodeSnippetFragment.fragmentDefinition).appending("\n" + LessonImageFragment.fragmentDefinition).appending("\n" + LessonCopyFragment.fragmentDefinition).appending("\n" + CategoryFragment.fragmentDefinition) }
 
   public var categoryId: String
 
@@ -320,11 +340,13 @@ public final class CoursesByCategoryWithIdQuery: GraphQLQuery {
   }
 
   public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Query"]
+    public static let possibleTypes: [String] = ["Query"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("category", arguments: ["id": GraphQLVariable("categoryId")], type: .object(Category.selections)),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("category", arguments: ["id": GraphQLVariable("categoryId")], type: .object(Category.selections)),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -346,12 +368,14 @@ public final class CoursesByCategoryWithIdQuery: GraphQLQuery {
     }
 
     public struct Category: GraphQLSelectionSet {
-      public static let possibleTypes = ["Category"]
+      public static let possibleTypes: [String] = ["Category"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("linkedFrom", type: .object(LinkedFrom.selections)),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("linkedFrom", type: .object(LinkedFrom.selections)),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -382,12 +406,14 @@ public final class CoursesByCategoryWithIdQuery: GraphQLQuery {
       }
 
       public struct LinkedFrom: GraphQLSelectionSet {
-        public static let possibleTypes = ["CategoryLinkingCollections"]
+        public static let possibleTypes: [String] = ["CategoryLinkingCollections"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("entryCollection", type: .object(EntryCollection.selections)),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("entryCollection", type: .object(EntryCollection.selections)),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -418,12 +444,14 @@ public final class CoursesByCategoryWithIdQuery: GraphQLQuery {
         }
 
         public struct EntryCollection: GraphQLSelectionSet {
-          public static let possibleTypes = ["EntryCollection"]
+          public static let possibleTypes: [String] = ["EntryCollection"]
 
-          public static let selections: [GraphQLSelection] = [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
-          ]
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
+            ]
+          }
 
           public private(set) var resultMap: ResultMap
 
@@ -454,12 +482,14 @@ public final class CoursesByCategoryWithIdQuery: GraphQLQuery {
           }
 
           public struct Item: GraphQLSelectionSet {
-            public static let possibleTypes = ["Course", "LayoutHighlightedCourse", "Layout", "LayoutCopy", "LayoutHeroImage", "LessonImage", "Lesson", "LessonCodeSnippets", "LessonCopy", "Category"]
+            public static let possibleTypes: [String] = ["Course", "LayoutHighlightedCourse", "Layout", "LayoutCopy", "LayoutHeroImage", "LessonImage", "Lesson", "LessonCodeSnippets", "LessonCopy", "Category"]
 
-            public static let selections: [GraphQLSelection] = [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLFragmentSpread(CourseFragment.self),
-            ]
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLFragmentSpread(CourseFragment.self),
+              ]
+            }
 
             public private(set) var resultMap: ResultMap
 
@@ -547,31 +577,35 @@ public final class CoursesByCategoryWithIdQuery: GraphQLQuery {
 }
 
 public final class CoursesQuery: GraphQLQuery {
-  /// query Courses {
-  ///   courseCollection {
-  ///     __typename
-  ///     items {
-  ///       __typename
-  ///       ...CourseFragment
-  ///     }
-  ///   }
-  /// }
-  public let operationDefinition =
-    "query Courses { courseCollection { __typename items { __typename ...CourseFragment } } }"
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    query Courses {
+      courseCollection {
+        __typename
+        items {
+          __typename
+          ...CourseFragment
+        }
+      }
+    }
+    """
 
-  public let operationName = "Courses"
+  public let operationName: String = "Courses"
 
-  public var queryDocument: String { return operationDefinition.appending(CourseFragment.fragmentDefinition).appending(AssetFragment.fragmentDefinition).appending(LessonFragment.fragmentDefinition).appending(LessonCodeSnippetFragment.fragmentDefinition).appending(LessonImageFragment.fragmentDefinition).appending(LessonCopyFragment.fragmentDefinition).appending(CategoryFragment.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending("\n" + CourseFragment.fragmentDefinition).appending("\n" + AssetFragment.fragmentDefinition).appending("\n" + LessonFragment.fragmentDefinition).appending("\n" + LessonCodeSnippetFragment.fragmentDefinition).appending("\n" + LessonImageFragment.fragmentDefinition).appending("\n" + LessonCopyFragment.fragmentDefinition).appending("\n" + CategoryFragment.fragmentDefinition) }
 
   public init() {
   }
 
   public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Query"]
+    public static let possibleTypes: [String] = ["Query"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("courseCollection", type: .object(CourseCollection.selections)),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("courseCollection", type: .object(CourseCollection.selections)),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -593,12 +627,14 @@ public final class CoursesQuery: GraphQLQuery {
     }
 
     public struct CourseCollection: GraphQLSelectionSet {
-      public static let possibleTypes = ["CourseCollection"]
+      public static let possibleTypes: [String] = ["CourseCollection"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -629,12 +665,14 @@ public final class CoursesQuery: GraphQLQuery {
       }
 
       public struct Item: GraphQLSelectionSet {
-        public static let possibleTypes = ["Course"]
+        public static let possibleTypes: [String] = ["Course"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLFragmentSpread(CourseFragment.self),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLFragmentSpread(CourseFragment.self),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -682,31 +720,35 @@ public final class CoursesQuery: GraphQLQuery {
 }
 
 public final class CategoriesQuery: GraphQLQuery {
-  /// query Categories {
-  ///   categoryCollection {
-  ///     __typename
-  ///     items {
-  ///       __typename
-  ///       ...CategoryFragment
-  ///     }
-  ///   }
-  /// }
-  public let operationDefinition =
-    "query Categories { categoryCollection { __typename items { __typename ...CategoryFragment } } }"
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    query Categories {
+      categoryCollection {
+        __typename
+        items {
+          __typename
+          ...CategoryFragment
+        }
+      }
+    }
+    """
 
-  public let operationName = "Categories"
+  public let operationName: String = "Categories"
 
-  public var queryDocument: String { return operationDefinition.appending(CategoryFragment.fragmentDefinition) }
+  public var queryDocument: String { return operationDefinition.appending("\n" + CategoryFragment.fragmentDefinition) }
 
   public init() {
   }
 
   public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes = ["Query"]
+    public static let possibleTypes: [String] = ["Query"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("categoryCollection", type: .object(CategoryCollection.selections)),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("categoryCollection", type: .object(CategoryCollection.selections)),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -728,12 +770,14 @@ public final class CategoriesQuery: GraphQLQuery {
     }
 
     public struct CategoryCollection: GraphQLSelectionSet {
-      public static let possibleTypes = ["CategoryCollection"]
+      public static let possibleTypes: [String] = ["CategoryCollection"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -764,12 +808,14 @@ public final class CategoriesQuery: GraphQLQuery {
       }
 
       public struct Item: GraphQLSelectionSet {
-        public static let possibleTypes = ["Category"]
+        public static let possibleTypes: [String] = ["Category"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLFragmentSpread(CategoryFragment.self),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLFragmentSpread(CategoryFragment.self),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -817,31 +863,35 @@ public final class CategoriesQuery: GraphQLQuery {
 }
 
 public struct LayoutFragment: GraphQLFragment {
-  /// fragment LayoutFragment on Layout {
-  ///   __typename
-  ///   title
-  ///   slug
-  ///   contentModulesCollection {
-  ///     __typename
-  ///     items {
-  ///       __typename
-  ///       ...LayoutHighlightedCourseFragment
-  ///       ...LayoutCopyFragment
-  ///       ...LayoutHeroImageFragment
-  ///     }
-  ///   }
-  /// }
-  public static let fragmentDefinition =
-    "fragment LayoutFragment on Layout { __typename title slug contentModulesCollection { __typename items { __typename ...LayoutHighlightedCourseFragment ...LayoutCopyFragment ...LayoutHeroImageFragment } } }"
+  /// The raw GraphQL definition of this fragment.
+  public static let fragmentDefinition: String =
+    """
+    fragment LayoutFragment on Layout {
+      __typename
+      title
+      slug
+      contentModulesCollection {
+        __typename
+        items {
+          __typename
+          ...LayoutHighlightedCourseFragment
+          ...LayoutCopyFragment
+          ...LayoutHeroImageFragment
+        }
+      }
+    }
+    """
 
-  public static let possibleTypes = ["Layout"]
+  public static let possibleTypes: [String] = ["Layout"]
 
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("title", type: .scalar(String.self)),
-    GraphQLField("slug", type: .scalar(String.self)),
-    GraphQLField("contentModulesCollection", type: .object(ContentModulesCollection.selections)),
-  ]
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("title", type: .scalar(String.self)),
+      GraphQLField("slug", type: .scalar(String.self)),
+      GraphQLField("contentModulesCollection", type: .object(ContentModulesCollection.selections)),
+    ]
+  }
 
   public private(set) var resultMap: ResultMap
 
@@ -890,12 +940,14 @@ public struct LayoutFragment: GraphQLFragment {
   }
 
   public struct ContentModulesCollection: GraphQLSelectionSet {
-    public static let possibleTypes = ["LayoutContentModulesCollection"]
+    public static let possibleTypes: [String] = ["LayoutContentModulesCollection"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -926,14 +978,16 @@ public struct LayoutFragment: GraphQLFragment {
     }
 
     public struct Item: GraphQLSelectionSet {
-      public static let possibleTypes = ["LayoutCopy", "LayoutHeroImage", "LayoutHighlightedCourse"]
+      public static let possibleTypes: [String] = ["LayoutCopy", "LayoutHeroImage", "LayoutHighlightedCourse"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(LayoutHighlightedCourseFragment.self),
-        GraphQLFragmentSpread(LayoutCopyFragment.self),
-        GraphQLFragmentSpread(LayoutHeroImageFragment.self),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLFragmentSpread(LayoutHighlightedCourseFragment.self),
+          GraphQLFragmentSpread(LayoutCopyFragment.self),
+          GraphQLFragmentSpread(LayoutHeroImageFragment.self),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -1008,22 +1062,26 @@ public struct LayoutFragment: GraphQLFragment {
 }
 
 public struct LayoutHighlightedCourseFragment: GraphQLFragment {
-  /// fragment LayoutHighlightedCourseFragment on LayoutHighlightedCourse {
-  ///   __typename
-  ///   course {
-  ///     __typename
-  ///     ...CourseFragment
-  ///   }
-  /// }
-  public static let fragmentDefinition =
-    "fragment LayoutHighlightedCourseFragment on LayoutHighlightedCourse { __typename course { __typename ...CourseFragment } }"
+  /// The raw GraphQL definition of this fragment.
+  public static let fragmentDefinition: String =
+    """
+    fragment LayoutHighlightedCourseFragment on LayoutHighlightedCourse {
+      __typename
+      course {
+        __typename
+        ...CourseFragment
+      }
+    }
+    """
 
-  public static let possibleTypes = ["LayoutHighlightedCourse"]
+  public static let possibleTypes: [String] = ["LayoutHighlightedCourse"]
 
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("course", type: .object(Course.selections)),
-  ]
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("course", type: .object(Course.selections)),
+    ]
+  }
 
   public private(set) var resultMap: ResultMap
 
@@ -1054,12 +1112,14 @@ public struct LayoutHighlightedCourseFragment: GraphQLFragment {
   }
 
   public struct Course: GraphQLSelectionSet {
-    public static let possibleTypes = ["Course"]
+    public static let possibleTypes: [String] = ["Course"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLFragmentSpread(CourseFragment.self),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(CourseFragment.self),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -1105,26 +1165,30 @@ public struct LayoutHighlightedCourseFragment: GraphQLFragment {
 }
 
 public struct LayoutHeroImageFragment: GraphQLFragment {
-  /// fragment LayoutHeroImageFragment on LayoutHeroImage {
-  ///   __typename
-  ///   title
-  ///   headline
-  ///   backgroundImage {
-  ///     __typename
-  ///     ...AssetFragment
-  ///   }
-  /// }
-  public static let fragmentDefinition =
-    "fragment LayoutHeroImageFragment on LayoutHeroImage { __typename title headline backgroundImage { __typename ...AssetFragment } }"
+  /// The raw GraphQL definition of this fragment.
+  public static let fragmentDefinition: String =
+    """
+    fragment LayoutHeroImageFragment on LayoutHeroImage {
+      __typename
+      title
+      headline
+      backgroundImage {
+        __typename
+        ...AssetFragment
+      }
+    }
+    """
 
-  public static let possibleTypes = ["LayoutHeroImage"]
+  public static let possibleTypes: [String] = ["LayoutHeroImage"]
 
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("title", type: .scalar(String.self)),
-    GraphQLField("headline", type: .scalar(String.self)),
-    GraphQLField("backgroundImage", type: .object(BackgroundImage.selections)),
-  ]
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("title", type: .scalar(String.self)),
+      GraphQLField("headline", type: .scalar(String.self)),
+      GraphQLField("backgroundImage", type: .object(BackgroundImage.selections)),
+    ]
+  }
 
   public private(set) var resultMap: ResultMap
 
@@ -1173,12 +1237,14 @@ public struct LayoutHeroImageFragment: GraphQLFragment {
   }
 
   public struct BackgroundImage: GraphQLSelectionSet {
-    public static let possibleTypes = ["Asset"]
+    public static let possibleTypes: [String] = ["Asset"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLFragmentSpread(AssetFragment.self),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(AssetFragment.self),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -1224,29 +1290,33 @@ public struct LayoutHeroImageFragment: GraphQLFragment {
 }
 
 public struct LayoutCopyFragment: GraphQLFragment {
-  /// fragment LayoutCopyFragment on LayoutCopy {
-  ///   __typename
-  ///   title
-  ///   headline
-  ///   copy
-  ///   ctaTitle
-  ///   ctaLink
-  ///   visualStyle
-  /// }
-  public static let fragmentDefinition =
-    "fragment LayoutCopyFragment on LayoutCopy { __typename title headline copy ctaTitle ctaLink visualStyle }"
+  /// The raw GraphQL definition of this fragment.
+  public static let fragmentDefinition: String =
+    """
+    fragment LayoutCopyFragment on LayoutCopy {
+      __typename
+      title
+      headline
+      copy
+      ctaTitle
+      ctaLink
+      visualStyle
+    }
+    """
 
-  public static let possibleTypes = ["LayoutCopy"]
+  public static let possibleTypes: [String] = ["LayoutCopy"]
 
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("title", type: .scalar(String.self)),
-    GraphQLField("headline", type: .scalar(String.self)),
-    GraphQLField("copy", type: .scalar(String.self)),
-    GraphQLField("ctaTitle", type: .scalar(String.self)),
-    GraphQLField("ctaLink", type: .scalar(String.self)),
-    GraphQLField("visualStyle", type: .scalar(String.self)),
-  ]
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("title", type: .scalar(String.self)),
+      GraphQLField("headline", type: .scalar(String.self)),
+      GraphQLField("copy", type: .scalar(String.self)),
+      GraphQLField("ctaTitle", type: .scalar(String.self)),
+      GraphQLField("ctaLink", type: .scalar(String.self)),
+      GraphQLField("visualStyle", type: .scalar(String.self)),
+    ]
+  }
 
   public private(set) var resultMap: ResultMap
 
@@ -1323,36 +1393,40 @@ public struct LayoutCopyFragment: GraphQLFragment {
 }
 
 public struct AssetFragment: GraphQLFragment {
-  /// fragment AssetFragment on Asset {
-  ///   __typename
-  ///   sys {
-  ///     __typename
-  ///     id
-  ///   }
-  ///   title
-  ///   description
-  ///   url
-  ///   width
-  ///   height
-  ///   contentType
-  ///   fileName
-  /// }
-  public static let fragmentDefinition =
-    "fragment AssetFragment on Asset { __typename sys { __typename id } title description url width height contentType fileName }"
+  /// The raw GraphQL definition of this fragment.
+  public static let fragmentDefinition: String =
+    """
+    fragment AssetFragment on Asset {
+      __typename
+      sys {
+        __typename
+        id
+      }
+      title
+      description
+      url
+      width
+      height
+      contentType
+      fileName
+    }
+    """
 
-  public static let possibleTypes = ["Asset"]
+  public static let possibleTypes: [String] = ["Asset"]
 
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("sys", type: .nonNull(.object(Sy.selections))),
-    GraphQLField("title", type: .scalar(String.self)),
-    GraphQLField("description", type: .scalar(String.self)),
-    GraphQLField("url", type: .scalar(String.self)),
-    GraphQLField("width", type: .scalar(Int.self)),
-    GraphQLField("height", type: .scalar(Int.self)),
-    GraphQLField("contentType", type: .scalar(String.self)),
-    GraphQLField("fileName", type: .scalar(String.self)),
-  ]
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("sys", type: .nonNull(.object(Sy.selections))),
+      GraphQLField("title", type: .scalar(String.self)),
+      GraphQLField("description", type: .scalar(String.self)),
+      GraphQLField("url", type: .scalar(String.self)),
+      GraphQLField("width", type: .scalar(Int.self)),
+      GraphQLField("height", type: .scalar(Int.self)),
+      GraphQLField("contentType", type: .scalar(String.self)),
+      GraphQLField("fileName", type: .scalar(String.self)),
+    ]
+  }
 
   public private(set) var resultMap: ResultMap
 
@@ -1446,12 +1520,14 @@ public struct AssetFragment: GraphQLFragment {
   }
 
   public struct Sy: GraphQLSelectionSet {
-    public static let possibleTypes = ["Sys"]
+    public static let possibleTypes: [String] = ["Sys"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("id", type: .nonNull(.scalar(String.self))),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(String.self))),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -1484,55 +1560,59 @@ public struct AssetFragment: GraphQLFragment {
 }
 
 public struct CourseFragment: GraphQLFragment {
-  /// fragment CourseFragment on Course {
-  ///   __typename
-  ///   sys {
-  ///     __typename
-  ///     id
-  ///   }
-  ///   title
-  ///   slug
-  ///   image {
-  ///     __typename
-  ///     ...AssetFragment
-  ///   }
-  ///   lessonsCollection {
-  ///     __typename
-  ///     items {
-  ///       __typename
-  ///       ...LessonFragment
-  ///     }
-  ///   }
-  ///   categoriesCollection {
-  ///     __typename
-  ///     items {
-  ///       __typename
-  ///       ...CategoryFragment
-  ///     }
-  ///   }
-  ///   shortDescription
-  ///   description
-  ///   duration
-  ///   skillLevel
-  /// }
-  public static let fragmentDefinition =
-    "fragment CourseFragment on Course { __typename sys { __typename id } title slug image { __typename ...AssetFragment } lessonsCollection { __typename items { __typename ...LessonFragment } } categoriesCollection { __typename items { __typename ...CategoryFragment } } shortDescription description duration skillLevel }"
+  /// The raw GraphQL definition of this fragment.
+  public static let fragmentDefinition: String =
+    """
+    fragment CourseFragment on Course {
+      __typename
+      sys {
+        __typename
+        id
+      }
+      title
+      slug
+      image {
+        __typename
+        ...AssetFragment
+      }
+      lessonsCollection {
+        __typename
+        items {
+          __typename
+          ...LessonFragment
+        }
+      }
+      categoriesCollection {
+        __typename
+        items {
+          __typename
+          ...CategoryFragment
+        }
+      }
+      shortDescription
+      description
+      duration
+      skillLevel
+    }
+    """
 
-  public static let possibleTypes = ["Course"]
+  public static let possibleTypes: [String] = ["Course"]
 
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("sys", type: .nonNull(.object(Sy.selections))),
-    GraphQLField("title", type: .scalar(String.self)),
-    GraphQLField("slug", type: .scalar(String.self)),
-    GraphQLField("image", type: .object(Image.selections)),
-    GraphQLField("lessonsCollection", type: .object(LessonsCollection.selections)),
-    GraphQLField("categoriesCollection", type: .object(CategoriesCollection.selections)),
-    GraphQLField("shortDescription", type: .scalar(String.self)),
-    GraphQLField("description", type: .scalar(String.self)),
-    GraphQLField("duration", type: .scalar(Int.self)),
-    GraphQLField("skillLevel", type: .scalar(String.self)),
-  ]
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("sys", type: .nonNull(.object(Sy.selections))),
+      GraphQLField("title", type: .scalar(String.self)),
+      GraphQLField("slug", type: .scalar(String.self)),
+      GraphQLField("image", type: .object(Image.selections)),
+      GraphQLField("lessonsCollection", type: .object(LessonsCollection.selections)),
+      GraphQLField("categoriesCollection", type: .object(CategoriesCollection.selections)),
+      GraphQLField("shortDescription", type: .scalar(String.self)),
+      GraphQLField("description", type: .scalar(String.self)),
+      GraphQLField("duration", type: .scalar(Int.self)),
+      GraphQLField("skillLevel", type: .scalar(String.self)),
+    ]
+  }
 
   public private(set) var resultMap: ResultMap
 
@@ -1644,12 +1724,14 @@ public struct CourseFragment: GraphQLFragment {
   }
 
   public struct Sy: GraphQLSelectionSet {
-    public static let possibleTypes = ["Sys"]
+    public static let possibleTypes: [String] = ["Sys"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("id", type: .nonNull(.scalar(String.self))),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(String.self))),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -1681,12 +1763,14 @@ public struct CourseFragment: GraphQLFragment {
   }
 
   public struct Image: GraphQLSelectionSet {
-    public static let possibleTypes = ["Asset"]
+    public static let possibleTypes: [String] = ["Asset"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLFragmentSpread(AssetFragment.self),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(AssetFragment.self),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -1731,12 +1815,14 @@ public struct CourseFragment: GraphQLFragment {
   }
 
   public struct LessonsCollection: GraphQLSelectionSet {
-    public static let possibleTypes = ["CourseLessonsCollection"]
+    public static let possibleTypes: [String] = ["CourseLessonsCollection"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -1767,12 +1853,14 @@ public struct CourseFragment: GraphQLFragment {
     }
 
     public struct Item: GraphQLSelectionSet {
-      public static let possibleTypes = ["Lesson"]
+      public static let possibleTypes: [String] = ["Lesson"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(LessonFragment.self),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLFragmentSpread(LessonFragment.self),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -1818,12 +1906,14 @@ public struct CourseFragment: GraphQLFragment {
   }
 
   public struct CategoriesCollection: GraphQLSelectionSet {
-    public static let possibleTypes = ["CourseCategoriesCollection"]
+    public static let possibleTypes: [String] = ["CourseCategoriesCollection"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -1854,12 +1944,14 @@ public struct CourseFragment: GraphQLFragment {
     }
 
     public struct Item: GraphQLSelectionSet {
-      public static let possibleTypes = ["Category"]
+      public static let possibleTypes: [String] = ["Category"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(CategoryFragment.self),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLFragmentSpread(CategoryFragment.self),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -1906,31 +1998,35 @@ public struct CourseFragment: GraphQLFragment {
 }
 
 public struct LessonFragment: GraphQLFragment {
-  /// fragment LessonFragment on Lesson {
-  ///   __typename
-  ///   title
-  ///   slug
-  ///   modulesCollection {
-  ///     __typename
-  ///     items {
-  ///       __typename
-  ///       ...LessonCodeSnippetFragment
-  ///       ...LessonImageFragment
-  ///       ...LessonCopyFragment
-  ///     }
-  ///   }
-  /// }
-  public static let fragmentDefinition =
-    "fragment LessonFragment on Lesson { __typename title slug modulesCollection { __typename items { __typename ...LessonCodeSnippetFragment ...LessonImageFragment ...LessonCopyFragment } } }"
+  /// The raw GraphQL definition of this fragment.
+  public static let fragmentDefinition: String =
+    """
+    fragment LessonFragment on Lesson {
+      __typename
+      title
+      slug
+      modulesCollection {
+        __typename
+        items {
+          __typename
+          ...LessonCodeSnippetFragment
+          ...LessonImageFragment
+          ...LessonCopyFragment
+        }
+      }
+    }
+    """
 
-  public static let possibleTypes = ["Lesson"]
+  public static let possibleTypes: [String] = ["Lesson"]
 
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("title", type: .scalar(String.self)),
-    GraphQLField("slug", type: .scalar(String.self)),
-    GraphQLField("modulesCollection", type: .object(ModulesCollection.selections)),
-  ]
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("title", type: .scalar(String.self)),
+      GraphQLField("slug", type: .scalar(String.self)),
+      GraphQLField("modulesCollection", type: .object(ModulesCollection.selections)),
+    ]
+  }
 
   public private(set) var resultMap: ResultMap
 
@@ -1979,12 +2075,14 @@ public struct LessonFragment: GraphQLFragment {
   }
 
   public struct ModulesCollection: GraphQLSelectionSet {
-    public static let possibleTypes = ["LessonModulesCollection"]
+    public static let possibleTypes: [String] = ["LessonModulesCollection"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("items", type: .nonNull(.list(.object(Item.selections)))),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -2015,14 +2113,16 @@ public struct LessonFragment: GraphQLFragment {
     }
 
     public struct Item: GraphQLSelectionSet {
-      public static let possibleTypes = ["LessonCodeSnippets", "LessonCopy", "LessonImage"]
+      public static let possibleTypes: [String] = ["LessonCodeSnippets", "LessonCopy", "LessonImage"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLFragmentSpread(LessonCodeSnippetFragment.self),
-        GraphQLFragmentSpread(LessonImageFragment.self),
-        GraphQLFragmentSpread(LessonCopyFragment.self),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLFragmentSpread(LessonCodeSnippetFragment.self),
+          GraphQLFragmentSpread(LessonImageFragment.self),
+          GraphQLFragmentSpread(LessonCopyFragment.self),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -2101,37 +2201,41 @@ public struct LessonFragment: GraphQLFragment {
 }
 
 public struct LessonCodeSnippetFragment: GraphQLFragment {
-  /// fragment LessonCodeSnippetFragment on LessonCodeSnippets {
-  ///   __typename
-  ///   title
-  ///   curl
-  ///   dotNet
-  ///   javascript
-  ///   java
-  ///   javaAndroid
-  ///   php
-  ///   python
-  ///   ruby
-  ///   swift
-  /// }
-  public static let fragmentDefinition =
-    "fragment LessonCodeSnippetFragment on LessonCodeSnippets { __typename title curl dotNet javascript java javaAndroid php python ruby swift }"
+  /// The raw GraphQL definition of this fragment.
+  public static let fragmentDefinition: String =
+    """
+    fragment LessonCodeSnippetFragment on LessonCodeSnippets {
+      __typename
+      title
+      curl
+      dotNet
+      javascript
+      java
+      javaAndroid
+      php
+      python
+      ruby
+      swift
+    }
+    """
 
-  public static let possibleTypes = ["LessonCodeSnippets"]
+  public static let possibleTypes: [String] = ["LessonCodeSnippets"]
 
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("title", type: .scalar(String.self)),
-    GraphQLField("curl", type: .scalar(String.self)),
-    GraphQLField("dotNet", type: .scalar(String.self)),
-    GraphQLField("javascript", type: .scalar(String.self)),
-    GraphQLField("java", type: .scalar(String.self)),
-    GraphQLField("javaAndroid", type: .scalar(String.self)),
-    GraphQLField("php", type: .scalar(String.self)),
-    GraphQLField("python", type: .scalar(String.self)),
-    GraphQLField("ruby", type: .scalar(String.self)),
-    GraphQLField("swift", type: .scalar(String.self)),
-  ]
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("title", type: .scalar(String.self)),
+      GraphQLField("curl", type: .scalar(String.self)),
+      GraphQLField("dotNet", type: .scalar(String.self)),
+      GraphQLField("javascript", type: .scalar(String.self)),
+      GraphQLField("java", type: .scalar(String.self)),
+      GraphQLField("javaAndroid", type: .scalar(String.self)),
+      GraphQLField("php", type: .scalar(String.self)),
+      GraphQLField("python", type: .scalar(String.self)),
+      GraphQLField("ruby", type: .scalar(String.self)),
+      GraphQLField("swift", type: .scalar(String.self)),
+    ]
+  }
 
   public private(set) var resultMap: ResultMap
 
@@ -2244,26 +2348,30 @@ public struct LessonCodeSnippetFragment: GraphQLFragment {
 }
 
 public struct LessonImageFragment: GraphQLFragment {
-  /// fragment LessonImageFragment on LessonImage {
-  ///   __typename
-  ///   title
-  ///   caption
-  ///   image {
-  ///     __typename
-  ///     ...AssetFragment
-  ///   }
-  /// }
-  public static let fragmentDefinition =
-    "fragment LessonImageFragment on LessonImage { __typename title caption image { __typename ...AssetFragment } }"
+  /// The raw GraphQL definition of this fragment.
+  public static let fragmentDefinition: String =
+    """
+    fragment LessonImageFragment on LessonImage {
+      __typename
+      title
+      caption
+      image {
+        __typename
+        ...AssetFragment
+      }
+    }
+    """
 
-  public static let possibleTypes = ["LessonImage"]
+  public static let possibleTypes: [String] = ["LessonImage"]
 
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("title", type: .scalar(String.self)),
-    GraphQLField("caption", type: .scalar(String.self)),
-    GraphQLField("image", type: .object(Image.selections)),
-  ]
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("title", type: .scalar(String.self)),
+      GraphQLField("caption", type: .scalar(String.self)),
+      GraphQLField("image", type: .object(Image.selections)),
+    ]
+  }
 
   public private(set) var resultMap: ResultMap
 
@@ -2312,12 +2420,14 @@ public struct LessonImageFragment: GraphQLFragment {
   }
 
   public struct Image: GraphQLSelectionSet {
-    public static let possibleTypes = ["Asset"]
+    public static let possibleTypes: [String] = ["Asset"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLFragmentSpread(AssetFragment.self),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLFragmentSpread(AssetFragment.self),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -2363,21 +2473,25 @@ public struct LessonImageFragment: GraphQLFragment {
 }
 
 public struct LessonCopyFragment: GraphQLFragment {
-  /// fragment LessonCopyFragment on LessonCopy {
-  ///   __typename
-  ///   title
-  ///   copy
-  /// }
-  public static let fragmentDefinition =
-    "fragment LessonCopyFragment on LessonCopy { __typename title copy }"
+  /// The raw GraphQL definition of this fragment.
+  public static let fragmentDefinition: String =
+    """
+    fragment LessonCopyFragment on LessonCopy {
+      __typename
+      title
+      copy
+    }
+    """
 
-  public static let possibleTypes = ["LessonCopy"]
+  public static let possibleTypes: [String] = ["LessonCopy"]
 
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("title", type: .scalar(String.self)),
-    GraphQLField("copy", type: .scalar(String.self)),
-  ]
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("title", type: .scalar(String.self)),
+      GraphQLField("copy", type: .scalar(String.self)),
+    ]
+  }
 
   public private(set) var resultMap: ResultMap
 
@@ -2418,26 +2532,30 @@ public struct LessonCopyFragment: GraphQLFragment {
 }
 
 public struct CategoryFragment: GraphQLFragment {
-  /// fragment CategoryFragment on Category {
-  ///   __typename
-  ///   sys {
-  ///     __typename
-  ///     id
-  ///   }
-  ///   title
-  ///   slug
-  /// }
-  public static let fragmentDefinition =
-    "fragment CategoryFragment on Category { __typename sys { __typename id } title slug }"
+  /// The raw GraphQL definition of this fragment.
+  public static let fragmentDefinition: String =
+    """
+    fragment CategoryFragment on Category {
+      __typename
+      sys {
+        __typename
+        id
+      }
+      title
+      slug
+    }
+    """
 
-  public static let possibleTypes = ["Category"]
+  public static let possibleTypes: [String] = ["Category"]
 
-  public static let selections: [GraphQLSelection] = [
-    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("sys", type: .nonNull(.object(Sy.selections))),
-    GraphQLField("title", type: .scalar(String.self)),
-    GraphQLField("slug", type: .scalar(String.self)),
-  ]
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("sys", type: .nonNull(.object(Sy.selections))),
+      GraphQLField("title", type: .scalar(String.self)),
+      GraphQLField("slug", type: .scalar(String.self)),
+    ]
+  }
 
   public private(set) var resultMap: ResultMap
 
@@ -2486,12 +2604,14 @@ public struct CategoryFragment: GraphQLFragment {
   }
 
   public struct Sy: GraphQLSelectionSet {
-    public static let possibleTypes = ["Sys"]
+    public static let possibleTypes: [String] = ["Sys"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("id", type: .nonNull(.scalar(String.self))),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(String.self))),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 

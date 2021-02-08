@@ -16,13 +16,14 @@ const path_1 = require("path");
 const apollo_language_server_1 = require("apollo-language-server");
 const OclifLoadingHandler_1 = require("./OclifLoadingHandler");
 const vscode_uri_1 = __importDefault(require("vscode-uri"));
+const chalk_1 = __importDefault(require("chalk"));
 const { version, referenceID } = require("../package.json");
 const headersArrayToObject = (arr) => {
     if (!arr)
         return;
     return arr
         .map(val => JSON.parse(val))
-        .reduce((pre, next) => (Object.assign({}, pre, next)), {});
+        .reduce((pre, next) => (Object.assign(Object.assign({}, pre), next)), {});
 };
 class ProjectCommand extends command_1.default {
     constructor() {
@@ -36,10 +37,7 @@ class ProjectCommand extends command_1.default {
         apollo_language_server_1.Debug.SetLoggers({
             info: this.log,
             warning: this.warn,
-            error: message => {
-                this.error(message);
-                this.exit(1);
-            }
+            error: console.error
         });
         const config = await this.createConfig(flags);
         if (!config)
@@ -50,7 +48,7 @@ class ProjectCommand extends command_1.default {
             title: "Loading Apollo Project",
             task: async (ctx) => {
                 await this.project.whenReady;
-                ctx = Object.assign({}, ctx, this.ctx);
+                ctx = Object.assign(Object.assign({}, ctx), this.ctx);
             }
         });
     }
@@ -67,12 +65,15 @@ class ProjectCommand extends command_1.default {
             this.exit(1);
             return;
         }
-        config.tag = flags.tag || config.tag || "current";
+        config.variant = flags.variant || flags.tag || config.variant;
+        config.graph = flags.graph || apollo_language_server_1.getGraphIdFromConfig(config.rawConfig);
+        if (flags.tag) {
+            console.warn(chalk_1.default.yellow("Using the --tag flag is deprecated. Please use --variant (or -v) instead."));
+        }
         config.setDefaults({
             engine: {
                 apiKey: flags.key,
-                endpoint: flags.engine,
-                frontend: flags.frontend
+                endpoint: flags.engine
             }
         });
         if (flags.endpoint) {
@@ -105,6 +106,10 @@ class ProjectCommand extends command_1.default {
             const defaults = this.configMap(flags);
             config.setDefaults(defaults);
         }
+        const [tokenType, identifier] = (config.engine.apiKey && config.engine.apiKey.split(":")) || [];
+        if (tokenType == "service" && identifier !== config.graph) {
+            throw new Error(`Cannot specify a service token that does not match graph. Graph ${config.graph} does not match graph from token (${identifier})`);
+        }
         return config;
     }
     createService(config, flags) {
@@ -135,7 +140,7 @@ class ProjectCommand extends command_1.default {
             });
         }
         else {
-            throw new Error("Unable to resolve project type. Please add either a client or service config. For more information, please refer to https://bit.ly/2ByILPj");
+            throw new Error("Unable to resolve project type. Please add either a client or service config. For more information, please refer to https://go.apollo.dev/t/config");
         }
         this.ctx.project = this.project;
     }
@@ -145,7 +150,7 @@ class ProjectCommand extends command_1.default {
             throw new Error("init must be called before trying to access this.ctx");
         }
         const tasks = await generateTasks(ctx);
-        return new listr_1.default([...this.tasks, ...tasks], Object.assign({}, (process.env.NODE_ENV === "test" && { renderer: "verbose" }), (options && typeof options === "function" ? options(ctx) : options), { dateFormat: false })).run();
+        return new listr_1.default([...this.tasks, ...tasks], Object.assign(Object.assign(Object.assign({}, (process.env.NODE_ENV === "test" && { renderer: "verbose" })), (options && typeof options === "function" ? options(ctx) : options)), { dateFormat: false })).run();
     }
     async catch(err) {
         this.error(err);
@@ -153,6 +158,7 @@ class ProjectCommand extends command_1.default {
     async finally(err) {
     }
 }
+exports.ProjectCommand = ProjectCommand;
 ProjectCommand.flags = {
     config: command_1.flags.string({
         char: "c",
@@ -166,25 +172,20 @@ ProjectCommand.flags = {
             const value = header.substring(separatorIndex + 1).trim();
             return JSON.stringify({ [key]: value });
         },
-        description: "Additional header to send to server for introspectionQuery. May be used multiple times to add multiple headers. NOTE: The `--endpoint` flag is REQUIRED if using the `--header` flag."
+        description: "Additional header to send during introspection. May be used multiple times to add multiple headers. NOTE: The `--endpoint` flag is REQUIRED if using the `--header` flag."
     }),
     endpoint: command_1.flags.string({
-        description: "The url of your service"
+        description: "The URL for the CLI use to introspect your service"
     }),
     key: command_1.flags.string({
-        description: "The API key for the Apollo Engine service",
-        default: () => process.env.ENGINE_API_KEY
+        description: "The API key to use for authentication to Apollo",
+        default: () => process.env.APOLLO_KEY || process.env.ENGINE_API_KEY
     }),
     engine: command_1.flags.string({
-        description: "Reporting URL for a custom Apollo Engine deployment",
-        hidden: true
-    }),
-    frontend: command_1.flags.string({
-        description: "URL for a custom Apollo Engine frontend",
+        description: "URL for a custom Apollo deployment",
         hidden: true
     })
 };
-exports.ProjectCommand = ProjectCommand;
 class ClientCommand extends ProjectCommand {
     constructor(argv, config) {
         super(argv, config);
@@ -216,7 +217,8 @@ class ClientCommand extends ProjectCommand {
         };
     }
 }
-ClientCommand.flags = Object.assign({}, ProjectCommand.flags, { clientReferenceId: command_1.flags.string({
+exports.ClientCommand = ClientCommand;
+ClientCommand.flags = Object.assign(Object.assign({}, ProjectCommand.flags), { clientReferenceId: command_1.flags.string({
         description: "Reference id for the client which will match ids from client traces, will use clientName if not provided"
     }), clientName: command_1.flags.string({
         description: "Name of the client that the queries will be attached to"
@@ -224,7 +226,16 @@ ClientCommand.flags = Object.assign({}, ProjectCommand.flags, { clientReferenceI
         description: "The version of the client that the queries will be attached to"
     }), tag: command_1.flags.string({
         char: "t",
-        description: "The published service tag for this client"
+        description: "[Deprecated: please use --variant instead] The tag (AKA variant) of the graph in Apollo to associate this client to",
+        hidden: true,
+        exclusive: ["variant"]
+    }), variant: command_1.flags.string({
+        char: "v",
+        description: "The variant of the graph in Apollo to associate this client to",
+        exclusive: ["tag"]
+    }), graph: command_1.flags.string({
+        char: "g",
+        description: "The ID for the graph in Apollo to operate client commands with. Overrides config file if set."
     }), queries: command_1.flags.string({
         description: "Deprecated in favor of the includes flag"
     }), includes: command_1.flags.string({
@@ -234,5 +245,4 @@ ClientCommand.flags = Object.assign({}, ProjectCommand.flags, { clientReferenceI
     }), tagName: command_1.flags.string({
         description: "Name of the template literal tag used to identify template literals containing GraphQL queries in Javascript/Typescript code"
     }) });
-exports.ClientCommand = ClientCommand;
 //# sourceMappingURL=Command.js.map

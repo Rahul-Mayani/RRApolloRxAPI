@@ -1,7 +1,6 @@
 import Command, { flags } from "@oclif/command";
-import Listr from "listr";
-import { ListrTask } from "listr";
-import { GraphQLProject, GraphQLClientProject, ApolloConfig } from "apollo-language-server";
+import Listr, { ListrTask } from "listr";
+import { ApolloConfig, GraphQLClientProject, GraphQLProject } from "apollo-language-server";
 import { DeepPartial } from "apollo-env";
 export interface ProjectContext<Flags = any, Args = any> {
     project: GraphQLProject;
@@ -16,8 +15,9 @@ export interface Flags {
     localSchemaFile?: string;
     key?: string;
     engine?: string;
-    frontend?: string;
     tag?: string;
+    variant?: string;
+    graph?: string;
     skipSSLValidation?: boolean;
 }
 export interface ClientCommandFlags extends Flags {
@@ -36,7 +36,6 @@ export declare abstract class ProjectCommand extends Command {
         endpoint: flags.IOptionFlag<string | undefined>;
         key: flags.IOptionFlag<string | undefined>;
         engine: flags.IOptionFlag<string | undefined>;
-        frontend: flags.IOptionFlag<string | undefined>;
     };
     project: GraphQLProject;
     tasks: ListrTask[];
@@ -56,6 +55,8 @@ export declare abstract class ClientCommand extends ProjectCommand {
         clientName: flags.IOptionFlag<string | undefined>;
         clientVersion: flags.IOptionFlag<string | undefined>;
         tag: flags.IOptionFlag<string | undefined>;
+        variant: flags.IOptionFlag<string | undefined>;
+        graph: flags.IOptionFlag<string | undefined>;
         queries: flags.IOptionFlag<string | undefined>;
         includes: flags.IOptionFlag<string | undefined>;
         excludes: flags.IOptionFlag<string | undefined>;
@@ -65,7 +66,6 @@ export declare abstract class ClientCommand extends ProjectCommand {
         endpoint: flags.IOptionFlag<string | undefined>;
         key: flags.IOptionFlag<string | undefined>;
         engine: flags.IOptionFlag<string | undefined>;
-        frontend: flags.IOptionFlag<string | undefined>;
     };
     project: GraphQLClientProject;
     constructor(argv: any, config: any);

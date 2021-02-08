@@ -6,7 +6,9 @@ target 'RRApolloRxAPI' do
   use_frameworks!
 
   # Pods for RRApolloRxAPI
-   pod 'Apollo', '~> 0.16.0'
+   pod 'Apollo'
+   pod "Apollo/SQLite"
+   pod "Apollo/WebSocket"
    pod 'RxCocoa'
    pod 'RxSwift'
 

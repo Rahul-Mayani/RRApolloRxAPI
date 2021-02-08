@@ -2,7 +2,7 @@ import { GraphQLSchema, DocumentNode } from "graphql";
 import { CompilerOptions } from "apollo-codegen-core/lib/compiler";
 import { CompilerOptions as LegacyCompilerOptions } from "apollo-codegen-core/lib/compiler/legacyIR";
 import { FlowCompilerOptions } from "../../apollo-codegen-flow/lib/language";
-export declare type TargetType = "json" | "swift" | "scala" | "flow" | "typescript" | "ts";
+export declare type TargetType = "json" | "json-modern" | "swift" | "scala" | "flow" | "typescript" | "ts";
 export declare type GenerationOptions = CompilerOptions & LegacyCompilerOptions & FlowCompilerOptions & {
     globalTypesFile?: string;
     tsFileExtension?: string;

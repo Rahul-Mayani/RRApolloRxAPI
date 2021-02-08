@@ -13,8 +13,10 @@ export default class Generate extends ClientCommand {
         customScalarsPrefix: flags.IOptionFlag<string | undefined>;
         mergeInFieldsFromFragmentSpreads: import("@oclif/parser/lib/flags").IBooleanFlag<boolean>;
         namespace: flags.IOptionFlag<string | undefined>;
+        omitDeprecatedEnumCases: import("@oclif/parser/lib/flags").IBooleanFlag<boolean>;
         operationIdsPath: flags.IOptionFlag<string | undefined>;
         only: flags.IOptionFlag<string | undefined>;
+        suppressSwiftMultilineStringLiterals: import("@oclif/parser/lib/flags").IBooleanFlag<boolean>;
         useFlowExactObjects: import("@oclif/parser/lib/flags").IBooleanFlag<boolean>;
         useFlowReadOnlyTypes: import("@oclif/parser/lib/flags").IBooleanFlag<boolean>;
         useReadOnlyTypes: import("@oclif/parser/lib/flags").IBooleanFlag<boolean>;
@@ -25,6 +27,8 @@ export default class Generate extends ClientCommand {
         clientName: flags.IOptionFlag<string | undefined>;
         clientVersion: flags.IOptionFlag<string | undefined>;
         tag: flags.IOptionFlag<string | undefined>;
+        variant: flags.IOptionFlag<string | undefined>;
+        graph: flags.IOptionFlag<string | undefined>;
         queries: flags.IOptionFlag<string | undefined>;
         includes: flags.IOptionFlag<string | undefined>;
         excludes: flags.IOptionFlag<string | undefined>;
@@ -34,7 +38,6 @@ export default class Generate extends ClientCommand {
         endpoint: flags.IOptionFlag<string | undefined>;
         key: flags.IOptionFlag<string | undefined>;
         engine: flags.IOptionFlag<string | undefined>;
-        frontend: flags.IOptionFlag<string | undefined>;
     };
     static args: {
         name: string;

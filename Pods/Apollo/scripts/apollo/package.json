@@ -1,8 +1,8 @@
 {
   "_from": "apollo",
-  "_id": "apollo@2.18.3",
+  "_id": "apollo@2.31.2",
   "_inBundle": false,
-  "_integrity": "sha512-NxlW4WprImYQcQvBCM87nrMV5RuhF7cynlFxnk8QIYhxVb+o79/h/b6Cs6jR3+LGrBPkY+GUKz04aO79RgHP4Q==",
+  "_integrity": "sha512-LzN1DplRDBZf+5+UIEnINU62iEZx9kX16MbFNOZWj4LeGRRNHacv+QzdcNLRdWvtySCrFdS0MA4NyDQ48kRELw==",
   "_location": "/apollo",
   "_phantomChildren": {},
   "_requested": {
@@ -19,60 +19,63 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/apollo/-/apollo-2.18.3.tgz",
-  "_shasum": "a06d8e2f3096e235ca20ec98c8e14bf5131f053a",
+  "_resolved": "http://localhost:4873/apollo/-/apollo-2.31.2.tgz",
+  "_shasum": "9a9153e95731f110c539656b900266cad72ced47",
   "_spec": "apollo",
-  "_where": "/home/circleci/project/packages/apollo/tmp",
+  "_where": "/home/circleci/project/tmp-pack-oclif",
   "author": {
     "name": "Apollo GraphQL",
     "email": "opensource@apollographql.com"
   },
   "bin": {
-    "apollo": "./bin/run"
+    "apollo": "bin/run"
   },
   "bugs": {
     "url": "https://github.com/apollographql/apollo-tooling/issues"
   },
   "bundleDependencies": false,
   "dependencies": {
-    "@apollographql/apollo-tools": "^0.4.0",
-    "@oclif/command": "1.5.18",
-    "@oclif/config": "1.13.3",
-    "@oclif/errors": "1.2.2",
-    "@oclif/plugin-autocomplete": "0.1.3",
-    "@oclif/plugin-help": "2.2.1",
-    "@oclif/plugin-not-found": "1.2.3",
-    "@oclif/plugin-plugins": "1.7.8",
+    "@apollographql/apollo-tools": "^0.4.8",
+    "@oclif/command": "1.8.0",
+    "@oclif/config": "1.17.0",
+    "@oclif/errors": "1.3.4",
+    "@oclif/plugin-autocomplete": "0.2.0",
+    "@oclif/plugin-help": "2.2.3",
+    "@oclif/plugin-not-found": "1.2.4",
+    "@oclif/plugin-plugins": "1.9.3",
     "@oclif/plugin-warn-if-update-available": "1.7.0",
-    "apollo-codegen-core": "^0.35.3",
-    "apollo-codegen-flow": "^0.33.28",
-    "apollo-codegen-scala": "^0.34.28",
-    "apollo-codegen-swift": "^0.35.8",
-    "apollo-codegen-typescript": "^0.35.3",
-    "apollo-env": "^0.5.1",
-    "apollo-graphql": "^0.3.3",
-    "apollo-language-server": "^1.15.3",
+    "apollo-codegen-core": "^0.38.2",
+    "apollo-codegen-flow": "^0.36.2",
+    "apollo-codegen-scala": "^0.37.2",
+    "apollo-codegen-swift": "^0.38.2",
+    "apollo-codegen-typescript": "^0.38.2",
+    "apollo-env": "^0.6.5",
+    "apollo-graphql": "^0.6.0",
+    "apollo-language-server": "^1.24.1",
     "chalk": "2.4.2",
+    "cli-ux": "5.5.0",
     "env-ci": "3.2.2",
     "gaze": "1.1.3",
-    "git-parse": "1.0.3",
-    "git-rev-sync": "1.12.0",
-    "glob": "7.1.4",
-    "graphql": "14.0.2 - 14.2.0 || ^14.3.1",
-    "graphql-tag": "2.10.1",
-    "heroku-cli-util": "8.0.11",
+    "git-parse": "1.0.4",
+    "git-rev-sync": "2.1.0",
+    "git-url-parse": "11.4.0",
+    "glob": "7.1.5",
+    "graphql": "14.0.2 - 14.2.0 || ^14.3.1 || ^15.0.0",
+    "graphql-tag": "2.11.0",
     "listr": "0.14.3",
     "lodash.identity": "3.0.0",
     "lodash.pickby": "4.6.0",
-    "moment": "2.24.0",
+    "mkdirp": "1.0.4",
+    "moment": "2.29.1",
     "strip-ansi": "5.2.0",
+    "table": "5.4.6",
     "tty": "1.0.1",
     "vscode-uri": "1.0.6"
   },
   "deprecated": false,
   "description": "Command line tool for Apollo GraphQL",
   "devDependencies": {
-    "typescript": "3.5.3"
+    "typescript": "3.7.5"
   },
   "engines": {
     "node": ">=8",
@@ -83,13 +86,15 @@
     "/lib",
     "/oclif.manifest.json"
   ],
-  "gitHead": "32e049c93294e75c943d439aeb07da33c84b67cb",
+  "gitHead": "7e448e7f82d8b81a49060caf84669f14b8e89adc",
   "homepage": "https://github.com/apollographql/apollo-tooling",
   "jest": {
     "preset": "ts-jest",
     "transformIgnorePatterns": [
-      "/node_modules/",
-      "/apollo-env/"
+      "/node_modules/"
+    ],
+    "setupFiles": [
+      "apollo-env"
     ],
     "testMatch": null,
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
@@ -138,8 +143,8 @@
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "prepack": "oclif-dev manifest && oclif-dev readme",
-    "version": "oclif-dev readme && git add README.md"
+    "version": "cross-env COLUMNS=74 oclif-dev readme && git add README.md"
   },
   "types": "lib/index.d.ts",
-  "version": "2.18.3"
+  "version": "2.31.2"
 }

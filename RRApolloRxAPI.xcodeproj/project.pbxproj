@@ -108,6 +108,7 @@
 			buildConfigurationList = EEDB06DA23B0E91000A5542D /* Build configuration list for PBXNativeTarget "RRApolloRxAPI" */;
 			buildPhases = (
 				515987699F7E71E005B42511 /* [CP] Check Pods Manifest.lock */,
+				EE58717F25D1738700E553C1 /* Generate Apollo GraphQL Schema */,
 				EEDB06E023B0F0BB00A5542D /* Generate Apollo GraphQL API */,
 				EEDB06C223B0E90F00A5542D /* Sources */,
 				EEDB06C323B0E90F00A5542D /* Frameworks */,
@@ -193,6 +194,24 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		EE58717F25D1738700E553C1 /* Generate Apollo GraphQL Schema */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Apollo GraphQL Schema";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "SCRIPT_PATH=\"${PODS_ROOT}/Apollo/scripts\"\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh schema:download --endpoint=https://graphql.contentful.com/content/v1/spaces/qz0n5cdakyl9/environments schema.json\n";
 		};
 		EEDB06E023B0F0BB00A5542D /* Generate Apollo GraphQL API */ = {
 			isa = PBXShellScriptBuildPhase;

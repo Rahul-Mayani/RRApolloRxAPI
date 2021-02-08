@@ -15,11 +15,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const command_1 = require("@oclif/command");
-const heroku_cli_util_1 = require("heroku-cli-util");
+const table_1 = require("table");
 const graphql_1 = require("graphql");
 const git_1 = require("../../git");
 const Command_1 = require("../../Command");
 const chalk_1 = __importDefault(require("chalk"));
+const sharedMessages_1 = require("../../utils/sharedMessages");
 class ServicePush extends Command_1.ProjectCommand {
     async run() {
         let result;
@@ -27,67 +28,68 @@ class ServicePush extends Command_1.ProjectCommand {
         let gitContext;
         await this.runTasks(({ flags, project, config }) => [
             {
-                title: "Uploading service to Engine",
+                title: "Uploading service to Apollo",
                 task: async () => {
-                    if (!config.name) {
-                        throw new Error("No service found to link to Engine");
+                    if (!config.graph) {
+                        throw sharedMessages_1.graphUndefinedError;
                     }
                     if (flags.federated) {
                         this.log("The --federated flag is no longer required when running federated commands. Use of the flag will not be supported in future versions of the CLI.");
                     }
                     isFederated = flags.serviceName;
-                    gitContext = await git_1.gitInfo(this.log);
+                    const gitInfoFromEnv = await git_1.gitInfo(this.log);
+                    gitContext = Object.assign(Object.assign(Object.assign(Object.assign({}, gitInfoFromEnv), (flags.author ? { committer: flags.author } : undefined)), (flags.branch ? { branch: flags.branch } : undefined)), (flags.commitId ? { commit: flags.commitId } : undefined));
                     if (isFederated) {
                         this.log("Fetching info from federated service");
-                        const info = await project.resolveFederationInfo();
-                        if (!info.sdl)
+                        const sdl = await project.resolveFederatedServiceSDL();
+                        if (!sdl)
                             throw new Error("No SDL found in response from federated service. This means that the federated service exposed a `__service` field that did not emit errors, but that did not contain a spec-compliant `sdl` field.");
-                        if (!flags.serviceURL && !info.url)
+                        if (!flags.serviceURL)
                             throw new Error("No URL found for federated service. Please provide the URL for the gateway to reach the service via the --serviceURL flag");
                         const { compositionConfig, errors, didUpdateGateway, serviceWasCreated } = await project.engine.uploadAndComposePartialSchema({
-                            id: config.name,
-                            graphVariant: config.tag,
-                            name: flags.serviceName || info.name,
-                            url: flags.serviceURL || info.url,
+                            id: config.graph,
+                            graphVariant: config.variant,
+                            name: flags.serviceName,
+                            url: flags.serviceURL,
                             revision: flags.serviceRevision ||
                                 (gitContext && gitContext.commit) ||
                                 "",
                             activePartialSchema: {
-                                sdl: info.sdl
+                                sdl
                             }
                         });
                         result = {
-                            implementingServiceName: flags.serviceName || info.name,
+                            implementingServiceName: flags.serviceName,
                             hash: compositionConfig && compositionConfig.schemaHash,
                             compositionErrors: errors,
                             serviceWasCreated,
                             didUpdateGateway,
-                            graphId: config.name,
-                            graphVariant: config.tag || "current"
+                            graphId: config.graph,
+                            graphVariant: config.variant
                         };
                         return;
                     }
-                    const schema = await project.resolveSchema({ tag: flags.tag });
+                    const schema = await project.resolveSchema({ tag: config.variant });
                     const variables = {
-                        id: config.name,
+                        id: config.graph,
                         schema: graphql_1.introspectionFromSchema(schema).__schema,
-                        tag: flags.tag,
+                        tag: config.variant,
                         gitContext
                     };
                     const { schema: _ } = variables, restVariables = __rest(variables, ["schema"]);
-                    this.debug("Variables sent to Engine:");
+                    this.debug("Variables sent to Apollo:");
                     this.debug(restVariables);
-                    this.debug("SDL of introspection sent to Engine:");
+                    this.debug("SDL of introspection sent to Apollo:");
                     this.debug(graphql_1.printSchema(schema));
                     const response = await project.engine.uploadSchema(variables);
                     if (response) {
                         result = {
-                            graphId: config.name,
+                            graphId: config.graph,
                             graphVariant: response.tag ? response.tag.tag : "current",
                             hash: response.tag ? response.tag.schema.hash : null,
                             code: response.code
                         };
-                        this.debug("Result received from Engine:");
+                        this.debug("Result received from Apollo:");
                         this.debug(result);
                     }
                 }
@@ -114,16 +116,9 @@ class ServicePush extends Command_1.ProjectCommand {
                     description: message
                 }))
             ].filter(x => x !== null);
-            heroku_cli_util_1.table(messages, {
-                columns: [
-                    { key: "type", label: "Change" },
-                    { key: "description", label: "Description" }
-                ],
-                printHeader: () => { },
-                printLine: line => {
-                    printed += `\n${line}`;
-                }
-            });
+            this.log(table_1.table([["Change", "Description"], ...messages.map(Object.values)], {
+                columns: { 1: { width: 70, wrapWord: true } }
+            }));
             this.log(printed);
             this.log("\n");
             this.exit(1);
@@ -135,29 +130,37 @@ class ServicePush extends Command_1.ProjectCommand {
             this.log(`The gateway for the '${graphString}' graph was NOT updated with a new schema\n`);
         }
         if (!isFederated || result.didUpdateGateway) {
-            heroku_cli_util_1.table([result], {
-                columns: [
-                    {
-                        key: "hash",
-                        label: "id",
-                        format: (hash) => hash.slice(0, 6)
-                    },
-                    { key: "graphId", label: "graph" },
-                    { key: "graphVariant", label: "tag" }
-                ]
-            });
+            this.log(table_1.table([
+                ["id", "graph", "tag"],
+                [result.hash.slice(0, 6), result.graphId, result.graphVariant]
+            ]));
             this.log("\n");
         }
     }
 }
+exports.default = ServicePush;
 ServicePush.aliases = ["schema:publish"];
-ServicePush.description = "Push a service to Engine";
-ServicePush.flags = Object.assign({}, Command_1.ProjectCommand.flags, { tag: command_1.flags.string({
+ServicePush.description = "Push a service definition to Apollo";
+ServicePush.flags = Object.assign(Object.assign({}, Command_1.ProjectCommand.flags), { tag: command_1.flags.string({
         char: "t",
-        description: "The tag to publish this service to",
-        default: "current"
+        description: "The tag (AKA variant) to publish your service to Apollo",
+        hidden: true,
+        exclusive: ["variant"]
+    }), variant: command_1.flags.string({
+        char: "v",
+        description: "The variant to publish your service to in Apollo",
+        exclusive: ["tag"]
+    }), graph: command_1.flags.string({
+        char: "g",
+        description: "The ID of the graph in Apollo to publish your service to. Overrides config file if set."
+    }), branch: command_1.flags.string({
+        description: "The branch name to associate with this publication"
+    }), commitId: command_1.flags.string({
+        description: "The SHA-1 hash of the commit to associate with this publication"
+    }), author: command_1.flags.string({
+        description: "The author to associate with this publication"
     }), localSchemaFile: command_1.flags.string({
-        description: "Path to your local GraphQL schema file (introspection result or SDL)"
+        description: "Path to one or more local GraphQL schema file(s), as introspection result or SDL. Supports comma-separated list of paths (ex. `--localSchemaFile=schema.graphql,extensions.graphql`)"
     }), federated: command_1.flags.boolean({
         char: "f",
         default: false,
@@ -170,5 +173,4 @@ ServicePush.flags = Object.assign({}, Command_1.ProjectCommand.flags, { tag: com
     }), serviceRevision: command_1.flags.string({
         description: "Provides a unique revision identifier for a change to an implementing service on a federated service push. The default of this is a git sha"
     }) });
-exports.default = ServicePush;
 //# sourceMappingURL=push.js.map

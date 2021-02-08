@@ -29,7 +29,8 @@ function generate(document, schema, outputPath, only, target, tagName, nextToSou
         options.addTypename = true;
         const context = compiler_1.compileToIR(schema, document, options);
         const outputIndividualFiles = localfs_1.fs.existsSync(outputPath) && localfs_1.fs.statSync(outputPath).isDirectory();
-        const generator = apollo_codegen_swift_1.generateSource(context, outputIndividualFiles, only);
+        const suppressSwiftMultilineStringLiterals = Boolean(options.suppressSwiftMultilineStringLiterals);
+        const generator = apollo_codegen_swift_1.generateSource(context, outputIndividualFiles, suppressSwiftMultilineStringLiterals, only);
         if (outputIndividualFiles) {
             writeGeneratedFiles(generator.generatedFiles, outputPath, "\n");
             writtenFiles += Object.keys(generator.generatedFiles).length;
@@ -123,10 +124,13 @@ function generate(document, schema, outputPath, only, target, tagName, nextToSou
     }
     else {
         let output;
-        const context = legacyIR_1.compileToLegacyIR(schema, document, options);
+        const context = legacyIR_1.compileToLegacyIR(schema, document, Object.assign(Object.assign({}, options), { exposeTypeNodes: target === "json-modern" }));
         switch (target) {
+            case "json-modern":
             case "json":
-                output = serializeToJSON_1.default(context);
+                output = serializeToJSON_1.default(context, {
+                    exposeTypeNodes: Boolean(options.exposeTypeNodes)
+                });
                 break;
             case "scala":
                 output = apollo_codegen_scala_1.generateSource(context);
@@ -154,7 +158,7 @@ function writeOperationIdsMap(context) {
         .forEach(operation => {
         operationIdsMap[operation.operationId] = {
             name: operation.operationName,
-            source: operation.source
+            source: operation.sourceWithFragments
         };
     });
     localfs_1.fs.writeFileSync(context.options.operationIdsPath, JSON.stringify(operationIdsMap, null, 2));

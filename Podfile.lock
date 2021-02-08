@@ -1,32 +1,48 @@
 PODS:
-  - Apollo (0.16.1):
-    - Apollo/Core (= 0.16.1)
-  - Apollo/Core (0.16.1)
-  - RxCocoa (5.0.1):
-    - RxRelay (~> 5)
-    - RxSwift (~> 5)
-  - RxRelay (5.0.1):
-    - RxSwift (~> 5)
-  - RxSwift (5.0.1)
+  - Apollo (0.39.0):
+    - Apollo/Core (= 0.39.0)
+  - Apollo/Core (0.39.0)
+  - Apollo/SQLite (0.39.0):
+    - Apollo/Core
+    - SQLite.swift (~> 0.12.2)
+  - Apollo/WebSocket (0.39.0):
+    - Apollo/Core
+    - Starscream (~> 3.1.1)
+  - RxCocoa (6.0.0):
+    - RxRelay (= 6.0.0)
+    - RxSwift (= 6.0.0)
+  - RxRelay (6.0.0):
+    - RxSwift (= 6.0.0)
+  - RxSwift (6.0.0)
+  - SQLite.swift (0.12.2):
+    - SQLite.swift/standard (= 0.12.2)
+  - SQLite.swift/standard (0.12.2)
+  - Starscream (3.1.1)
 
 DEPENDENCIES:
-  - Apollo (~> 0.16.0)
+  - Apollo
+  - Apollo/SQLite
+  - Apollo/WebSocket
   - RxCocoa
   - RxSwift
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Apollo
     - RxCocoa
     - RxRelay
     - RxSwift
+    - SQLite.swift
+    - Starscream
 
 SPEC CHECKSUMS:
-  Apollo: 2b08fca48664d25e1dc8635f0ad128483ccba43b
-  RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
-  RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
-  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
+  Apollo: f6c6410ebee82dd5846be87b81cedc8bc7754a82
+  RxCocoa: 3f79328fafa3645b34600f37c31e64c73ae3a80e
+  RxRelay: 8d593be109c06ea850df027351beba614b012ffb
+  RxSwift: c14e798c59b9f6e9a2df8fd235602e85cc044295
+  SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
-PODFILE CHECKSUM: 81d4bd683520c30afbc8720140a9236d30d04ba0
+PODFILE CHECKSUM: ed3d0f589a35ba1156afc6297485d376f377ad35
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.10.1

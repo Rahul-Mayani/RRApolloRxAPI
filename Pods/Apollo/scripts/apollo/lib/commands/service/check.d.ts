@@ -29,6 +29,11 @@ export default class ServiceCheck extends ProjectCommand {
     static description: string;
     static flags: {
         tag: flags.IOptionFlag<string | undefined>;
+        variant: flags.IOptionFlag<string | undefined>;
+        graph: flags.IOptionFlag<string | undefined>;
+        branch: flags.IOptionFlag<string | undefined>;
+        commitId: flags.IOptionFlag<string | undefined>;
+        author: flags.IOptionFlag<string | undefined>;
         validationPeriod: flags.IOptionFlag<string | undefined>;
         queryCountThreshold: import("@oclif/parser/lib/flags").IOptionFlag<number | undefined>;
         queryCountThresholdPercentage: import("@oclif/parser/lib/flags").IOptionFlag<number | undefined>;
@@ -36,12 +41,12 @@ export default class ServiceCheck extends ProjectCommand {
         localSchemaFile: flags.IOptionFlag<string | undefined>;
         markdown: import("@oclif/parser/lib/flags").IBooleanFlag<boolean>;
         serviceName: flags.IOptionFlag<string | undefined>;
+        ignoreFailures: import("@oclif/parser/lib/flags").IBooleanFlag<boolean>;
         config: flags.IOptionFlag<string | undefined>;
         header: flags.IOptionFlag<string | undefined>;
         endpoint: flags.IOptionFlag<string | undefined>;
         key: flags.IOptionFlag<string | undefined>;
         engine: flags.IOptionFlag<string | undefined>;
-        frontend: flags.IOptionFlag<string | undefined>;
     };
     run(): Promise<void>;
 }

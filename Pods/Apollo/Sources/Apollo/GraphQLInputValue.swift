@@ -6,7 +6,7 @@ public protocol GraphQLInputValue {
 
 public struct GraphQLVariable {
   let name: String
-  
+
   public init(_ name: String) {
     self.name = name
   }
@@ -24,6 +24,19 @@ extension GraphQLVariable: GraphQLInputValue {
 extension JSONEncodable {
   public func evaluate(with variables: [String: JSONEncodable]?) throws -> JSONValue {
     return jsonValue
+  }
+}
+
+extension Optional: GraphQLInputValue {
+  public func evaluate(with variables: [String: JSONEncodable]?) throws -> JSONValue {
+    switch self {
+    case .none:
+      return NSNull()
+    case .some(let wrapped as GraphQLInputValue):
+      return try wrapped.evaluate(with: variables)
+    default:
+      fatalError("Optional is only GraphQLInputValue if Wrapped is")
+    }
   }
 }
 

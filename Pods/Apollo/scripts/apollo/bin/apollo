@@ -30,8 +30,8 @@ else
     NODE="$XDG_DATA_HOME/oclif/node/node-custom"
   elif [ -x "$(command -v "$DIR/node")" ]; then
     NODE="$DIR/node"
-  elif [ -x "$(command -v "$XDG_DATA_HOME/oclif/node/node-10.16.3")" ]; then
-    NODE="$XDG_DATA_HOME/oclif/node/node-10.16.3"
+  elif [ -x "$(command -v "$XDG_DATA_HOME/oclif/node/node-10.23.0")" ]; then
+    NODE="$XDG_DATA_HOME/oclif/node/node-10.23.0"
   elif [ -x "$(command -v node)" ]; then
     NODE=node
   else

@@ -15,20 +15,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Command_1 = require("../../Command");
-const heroku_cli_util_1 = require("heroku-cli-util");
+const table_1 = require("table");
 const path_1 = require("path");
 const vscode_uri_1 = __importDefault(require("vscode-uri"));
 const getOperationManifestFromProject_1 = require("../../utils/getOperationManifestFromProject");
 const apollo_graphql_1 = require("apollo-graphql");
 const utils_1 = require("../../utils");
 const chalk_1 = __importDefault(require("chalk"));
+const sharedMessages_1 = require("../../utils/sharedMessages");
 class ClientPush extends Command_1.ClientCommand {
     async run() {
         const invalidOperationsErrorMessage = "encountered invalid operations";
         let result = "";
         try {
             await this.runTasks(({ flags, project, config }) => {
-                const clientBundleInfo = `${chalk_1.default.blue((config.client && config.client.name) || flags)}${chalk_1.default.blue((config.client &&
+                const clientBundleInfo = `${chalk_1.default.cyan((config.client && config.client.name) || flags)}${chalk_1.default.cyan((config.client &&
                     config.client.version &&
                     `@${config.client.version}`) ||
                     "")}`;
@@ -42,14 +43,14 @@ class ClientPush extends Command_1.ClientCommand {
                         }
                     },
                     {
-                        title: `Checked operations against ${chalk_1.default.blue(config.name || "")}@${chalk_1.default.blue(config.tag)}`,
+                        title: `Checked operations against ${chalk_1.default.cyan(config.graph + "@" + config.variant)}`,
                         task: async () => { }
                     },
                     {
                         title: "Pushing operations to operation registry",
                         task: async (_, task) => {
-                            if (!config.name) {
-                                throw new Error("No service found to link to Engine. Engine is required for this command.");
+                            if (!config.graph) {
+                                throw sharedMessages_1.graphUndefinedError;
                             }
                             const operationManifest = getOperationManifestFromProject_1.getOperationManifestFromProject(this.project);
                             const signatureToOperation = generateSignatureToOperationMap(this.project, config);
@@ -63,10 +64,10 @@ class ClientPush extends Command_1.ClientCommand {
                                     identifier: referenceID || name,
                                     version
                                 },
-                                id: config.name,
+                                id: config.graph,
                                 operations: operationManifest,
                                 manifestVersion: 2,
-                                graphVariant: config.tag
+                                graphVariant: config.variant
                             };
                             const { operations: _op } = variables, restVariables = __rest(variables, ["operations"]);
                             this.debug("Variables sent to Apollo");
@@ -81,9 +82,24 @@ class ClientPush extends Command_1.ClientCommand {
                                 if (invalidOperations) {
                                     invalidOperations.forEach(operation => {
                                         const { operationName, file } = signatureToOperation[operation.signature];
-                                        result += `\n${chalk_1.default.red("FAIL")}\t${operationName} ${chalk_1.default.blue(file)}`;
-                                        operation.errors &&
-                                            operation.errors.forEach(({ message }) => (result += `\n\t${message}`));
+                                        result += `\nError in: ${chalk_1.default.cyan(file)}\n`;
+                                        result += table_1.table([
+                                            ["Status", "Operation", "Errors"],
+                                            [
+                                                chalk_1.default.red("Error"),
+                                                operationName,
+                                                (operation.errors
+                                                    ? operation.errors.map(({ message }) => message)
+                                                    : []).join("\n")
+                                            ]
+                                        ], {
+                                            columns: {
+                                                2: {
+                                                    width: 50,
+                                                    wrapWord: true
+                                                }
+                                            }
+                                        });
                                     });
                                     task.title = `Failed to push operations, due to ${utils_1.pluralize(invalidOperations.length, "invalid operation")}`;
                                     throw new Error(invalidOperationsErrorMessage);
@@ -100,24 +116,13 @@ class ClientPush extends Command_1.ClientCommand {
                             else {
                                 if (newOperations && newOperations.length) {
                                     task.title = `Successfully pushed ${utils_1.pluralize(newOperations.length, "operation")} to the operation registry`;
-                                    heroku_cli_util_1.table(newOperations.map(operation => {
-                                        const { operationName, file } = signatureToOperation[operation.signature];
-                                        return {
-                                            added: chalk_1.default.green("ADDED"),
-                                            name: operationName,
-                                            file: chalk_1.default.blue(file)
-                                        };
-                                    }), {
-                                        columns: [
-                                            { key: "added", label: "Added" },
-                                            { key: "name", label: "Operation Name" },
-                                            { key: "file", label: "File Path" }
-                                        ],
-                                        printHeader: () => { },
-                                        printLine: line => {
-                                            result += `\n${line}`;
-                                        }
-                                    });
+                                    result += table_1.table([
+                                        ["Status", "Operation Name"],
+                                        ...newOperations.map(operation => {
+                                            const { operationName, file } = signatureToOperation[operation.signature];
+                                            return [chalk_1.default.green("ADDED"), operationName];
+                                        })
+                                    ]);
                                 }
                                 else {
                                     task.title = `All operations were already found in the operation registry`;
@@ -138,9 +143,9 @@ class ClientPush extends Command_1.ClientCommand {
         this.log(result);
     }
 }
+exports.default = ClientPush;
 ClientPush.description = "Register operations with Apollo, adding them to the safelist";
 ClientPush.flags = Object.assign({}, Command_1.ClientCommand.flags);
-exports.default = ClientPush;
 function generateSignatureToOperationMap(project, config) {
     return Object.fromEntries(Object.entries(project.mergedOperationsAndFragmentsForService).map(([operationName, document]) => {
         const operationDefinition = document.definitions.find(({ kind }) => kind === "OperationDefinition");

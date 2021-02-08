@@ -25,15 +25,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         APIManager.shared.rxFetch(query: query)
-            .subscribeOn(RXScheduler.concurrentBackground)
-            .observeOn(RXScheduler.main)
+            .subscribe(on: RXScheduler.concurrentBackground)
+            .observe(on: RXScheduler.main)
             .subscribe(onSuccess: { response in
                 print(response)
             }, onError: { error in
                 print(error)
             }).disposed(by: rxbag)
     }
-
-
 }
 

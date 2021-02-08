@@ -10,6 +10,10 @@ pod 'RxSwift'
 
 pod 'Apollo' 
 
+pod "Apollo/SQLite"
+
+pod "Apollo/WebSocket"
+
 ## Installation
 
 #### Manually

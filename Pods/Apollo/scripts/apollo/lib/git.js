@@ -21,6 +21,7 @@ const git_parse_1 = require("git-parse");
 const git_rev_sync_1 = __importDefault(require("git-rev-sync"));
 const lodash_pickby_1 = __importDefault(require("lodash.pickby"));
 const lodash_identity_1 = __importDefault(require("lodash.identity"));
+const git_url_parse_1 = __importDefault(require("git-url-parse"));
 const findGitRoot = (start) => {
     start = start || process.cwd();
     if (typeof start === "string") {
@@ -39,15 +40,29 @@ const findGitRoot = (start) => {
         return findGitRoot(start);
     }
 };
+exports.sanitizeGitRemote = (remote) => {
+    if (!remote)
+        return null;
+    const info = git_url_parse_1.default(remote);
+    const source = info.source.toLowerCase();
+    if (source !== "github.com" &&
+        source !== "gitlab.com" &&
+        source !== "bitbucket.org")
+        return null;
+    if (info.user !== "" && info.user !== "git") {
+        info.user = "REDACTED";
+    }
+    info.token = "";
+    info.href = null;
+    return git_url_parse_1.default.stringify(info);
+};
 exports.gitInfo = async (log) => {
     const { commit, branch: ciBranch, root, prBranch } = env_ci_1.default();
     const gitLoc = root ? root : findGitRoot();
     if (!commit)
         return;
-    let committer;
+    let committer, remoteUrl, message;
     let branch = ciBranch || prBranch;
-    let remoteUrl = process.env.BUILD_REPOSITORY_ID;
-    let message;
     if (gitLoc) {
         const _a = await git_parse_1.gitToJs(gitLoc)
             .then((commits) => commits && commits.length > 0
@@ -57,7 +72,7 @@ exports.gitInfo = async (log) => {
         committer = `${authorName || ""} ${authorEmail ? `<${authorEmail}>` : ""}`.trim();
         message = commit.message;
         try {
-            remoteUrl = git_rev_sync_1.default.remoteUrl();
+            remoteUrl = exports.sanitizeGitRemote(git_rev_sync_1.default.remoteUrl());
         }
         catch (e) {
             log(["Unable to retrieve remote url, failed with:", e].join("\n\n"));

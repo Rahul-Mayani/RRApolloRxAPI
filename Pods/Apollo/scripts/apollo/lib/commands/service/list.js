@@ -6,10 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const command_1 = require("@oclif/command");
 const Command_1 = require("../../Command");
 const lodash_sortby_1 = __importDefault(require("lodash.sortby"));
-const heroku_cli_util_1 = require("heroku-cli-util");
+const table_1 = require("table");
 const moment_1 = __importDefault(require("moment"));
-const apollo_language_server_1 = require("apollo-language-server");
 const chalk_1 = __importDefault(require("chalk"));
+const sharedMessages_1 = require("../../utils/sharedMessages");
 const formatImplementingService = (implementingService, effectiveDate = new Date()) => {
     return {
         name: implementingService.name,
@@ -17,7 +17,7 @@ const formatImplementingService = (implementingService, effectiveDate = new Date
         updatedAt: `${moment_1.default(implementingService.updatedAt).format("D MMMM YYYY")} (${moment_1.default(implementingService.updatedAt).from(effectiveDate)})`
     };
 };
-function formatHumanReadable({ implementingServices, graphName, frontendUrl }) {
+function formatHumanReadable({ implementingServices, graphName, frontendUrlRoot }) {
     let result = "";
     if (!implementingServices ||
         implementingServices.__typename === "NonFederatedImplementingService") {
@@ -29,49 +29,46 @@ function formatHumanReadable({ implementingServices, graphName, frontendUrl }) {
     }
     else {
         const sortedImplementingServices = lodash_sortby_1.default(implementingServices.services, [service => service.name.toUpperCase()]);
-        heroku_cli_util_1.table(sortedImplementingServices
-            .map(sortedImplementingService => formatImplementingService(sortedImplementingService, process.env.NODE_ENV === "test" ? new Date("2019-06-13") : undefined))
-            .sort((s1, s2) => s1.name.toUpperCase() > s2.name.toUpperCase() ? 1 : -1)
-            .filter(Boolean), {
-            columns: [
-                { key: "name", label: "name" },
-                { key: "url", label: "URL" },
-                { key: "updatedAt", label: "last updated" }
-            ],
-            printLine: line => {
-                result += `\n${line}`;
-            }
-        });
+        console.log(table_1.table([
+            ["Name", "URL", "Last Updated"],
+            ...sortedImplementingServices
+                .map(sortedImplementingService => formatImplementingService(sortedImplementingService, process.env.NODE_ENV === "test"
+                ? new Date("2019-06-13")
+                : undefined))
+                .sort((s1, s2) => s1.name.toUpperCase() > s2.name.toUpperCase() ? 1 : -1)
+                .map(Object.values)
+                .filter(Boolean)
+        ]));
         const serviceListUrlEnding = `/graph/${graphName}/service-list`;
-        const targetUrl = `${frontendUrl}${serviceListUrlEnding}`;
-        result += `\n\nView full details at: ${targetUrl}`;
+        const targetUrl = `${frontendUrlRoot}${serviceListUrlEnding}`;
+        result += `\nView full details at: ${chalk_1.default.cyan(targetUrl)}\n`;
     }
     return result;
 }
 class ServiceList extends Command_1.ProjectCommand {
     async run() {
         const taskOutput = {};
-        let schema;
+        let graphID;
+        let graphVariant;
         try {
             await this.runTasks(({ config, flags, project }) => {
-                if (!apollo_language_server_1.isServiceProject(project)) {
-                    throw new Error("This project needs to be configured as a service project but is configured as a client project. Please see bit.ly/2ByILPj for help regarding configuration.");
-                }
-                const graphName = config.name;
-                const variant = flags.tag || config.tag || "current";
-                if (!graphName) {
-                    throw new Error("No service found to link to Engine");
+                graphID = config.graph;
+                graphVariant = config.variant;
+                if (!graphID) {
+                    throw sharedMessages_1.graphUndefinedError;
                 }
                 return [
                     {
-                        title: `Fetching list of services for graph ${chalk_1.default.blue(graphName)}`,
+                        title: `Fetching list of services for graph ${chalk_1.default.cyan(graphID + "@" + graphVariant)}`,
                         task: async (ctx, task) => {
-                            const { implementingServices } = await project.engine.listServices({
-                                id: graphName,
-                                graphVariant: variant
+                            const { frontendUrlRoot, service } = await project.engine.listServices({
+                                id: graphID,
+                                graphVariant: graphVariant
                             });
+                            const { implementingServices } = service;
                             const newContext = {
                                 implementingServices,
+                                frontendUrlRoot,
                                 config
                             };
                             Object.assign(ctx, newContext);
@@ -88,21 +85,26 @@ class ServiceList extends Command_1.ProjectCommand {
             }
             throw error;
         }
-        const { service } = taskOutput.config;
-        if (!service || !taskOutput.config) {
-            throw new Error("Service mising from config. This should have been validated elsewhere");
-        }
         this.log(formatHumanReadable({
             implementingServices: taskOutput.implementingServices,
-            graphName: taskOutput.config.name,
-            frontendUrl: taskOutput.config.engine.frontend || apollo_language_server_1.DefaultEngineConfig.frontend
+            graphName: taskOutput.config.graph,
+            frontendUrlRoot: taskOutput.frontendUrlRoot
         }));
     }
 }
-ServiceList.description = "List the services in a graph";
-ServiceList.flags = Object.assign({}, Command_1.ProjectCommand.flags, { tag: command_1.flags.string({
-        char: "t",
-        description: "The published tag to list the services from"
-    }) });
 exports.default = ServiceList;
+ServiceList.description = "List the services in a graph";
+ServiceList.flags = Object.assign(Object.assign({}, Command_1.ProjectCommand.flags), { tag: command_1.flags.string({
+        char: "t",
+        description: "[Deprecated: please use --variant instead] The tag (AKA variant) to list implementing services for",
+        hidden: true,
+        exclusive: ["variant"]
+    }), variant: command_1.flags.string({
+        char: "v",
+        description: "The variant to list implementing services for",
+        exclusive: ["tag"]
+    }), graph: command_1.flags.string({
+        char: "g",
+        description: "The ID of the graph in the Apollo registry for which to list implementing services. Overrides config file if set."
+    }) });
 //# sourceMappingURL=list.js.map

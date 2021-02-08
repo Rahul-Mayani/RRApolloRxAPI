@@ -1,9 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const apollo_graphql_1 = require("apollo-graphql");
-function getOperationManifestFromProject(project) {
+function getOperationManifestFromProject(project, options = {
+    preserveStringAndNumericLiterals: false
+}) {
     const manifest = Object.entries(project.mergedOperationsAndFragmentsForService).map(([operationName, operationAST]) => {
-        const printed = apollo_graphql_1.defaultOperationRegistrySignature(operationAST, operationName);
+        const printed = apollo_graphql_1.operationRegistrySignature(operationAST, operationName, {
+            preserveStringAndNumericLiterals: options.preserveStringAndNumericLiterals
+        });
         return {
             signature: apollo_graphql_1.operationHash(printed),
             document: printed,

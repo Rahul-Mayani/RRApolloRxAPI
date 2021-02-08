@@ -6,5 +6,7 @@ export interface ManifestEntry {
         engineSignature: string;
     };
 }
-export declare function getOperationManifestFromProject(project: GraphQLClientProject): ManifestEntry[];
+export declare function getOperationManifestFromProject(project: GraphQLClientProject, options?: {
+    preserveStringAndNumericLiterals: boolean;
+}): ManifestEntry[];
 //# sourceMappingURL=getOperationManifestFromProject.d.ts.map
