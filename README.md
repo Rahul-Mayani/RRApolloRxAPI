@@ -2,7 +2,7 @@
 GraphQL (Apollo) API Request by RxSwift
 
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Rahul-Mayani/RRApolloRxAPI/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/Rahul-Mayani/RRApolloRxAPI/blob/master/LICENSE)
 [![iOS](https://img.shields.io/badge/Platform-iOS-purpel.svg?style=flat)](https://developer.apple.com/ios/)
 
 [![Swift 5](https://img.shields.io/badge/Swift-5-orange.svg?style=flat)](https://developer.apple.com/swift/)
